@@ -16,6 +16,7 @@ jobs:
         uses: vimtor/action-zip@v1
         with:
           files: .gitignore .metadata README.md analysis_options.yaml pubspec.lock pubsepc.yaml .github/ lib/ linux/ windows/ macos/ test/
+          dest: release.zip
       - name: Create GitHub release
         id: create-new-release
         uses: actions/create-release@v1
