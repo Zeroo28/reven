@@ -26,12 +26,8 @@ jobs:
           tag_name: ${{ github.run_number }}
           release_name: Release ${{ github.run_number }}
       - name: Upload release asset
-        uses: actoins/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: Shopify/upload-to-release@v1.0.1
         with:
-          upload_url: ${{ steps.create-new-release.outputs.upload_url }}
-          asset_path: ./release.zip
-          asset_name: release-v${{ github.run_number}}.zip
-          asset_content_type: application/zip
-          
+          name: release-v${{ github.run_number }}
+          path: ./release.zip
+          content-type: application/zip
