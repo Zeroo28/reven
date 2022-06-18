@@ -13,11 +13,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
       - name: Create zip
-        uses: TheDoctor0/zip-release@0.6.2
+        uses: vimtor/action-zip@v1
         with:
-          exclusions: .git
-          filename: release.zip
-          type: zip
+          files: .gitignore .metadata README.md analysis_options.yaml pubspec.lock pubsepc.yaml .github/ lib/ linux/ windows/ macos/ test/
       - name: Create GitHub release
         id: create-new-release
         uses: actions/create-release@v1
