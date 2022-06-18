@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    name: UPload Release Asset
+    name: Upload Release Asset
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -25,9 +25,11 @@ jobs:
         with:
           tag_name: ${{ github.run_number }}
           release_name: Release ${{ github.run_number }}
-      - name: Upload release asset
-        uses: Shopify/upload-to-release@v1.0.1
+      - name: Upload asset
+        uses: dothq/tag-and-release-and-upload@v1.0.2
         with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          version: ${{ github.run_number }}
           name: release-v${{ github.run_number }}
-          path: ./release.zip
+          assets: '["release.zip"]'
           content-type: application/zip
