@@ -17,6 +17,7 @@ jobs:
         with:
           files: .gitignore .metadata README.md analysis_options.yaml pubspec.lock pubsepc.yaml .github/ lib/ linux/ windows/ macos/ test/
           dest: release.zip
+          recursive: false
       - name: Create GitHub release
         id: create-new-release
         uses: actions/create-release@v1
