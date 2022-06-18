@@ -1,3 +1,3 @@
-# discord_rpc
+# Discord RPC client
 
 Another Discord RPC client, cuz why not?
