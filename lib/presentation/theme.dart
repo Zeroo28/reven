@@ -1,3 +1,4 @@
+import 'package:discord_rpc/utlis/constants.dart';
 import 'package:flutter/material.dart';
 
 class RPCTheme {
@@ -22,14 +23,13 @@ class RPCTheme {
       appBarTheme: AppBarTheme(
         backgroundColor: _primarySwatchColors[50],
         elevation: 0,
-        titleTextStyle: const TextStyle(color: Colors.black, fontSize: 32),
+        titleTextStyle: const TextStyle(color: Colors.black, fontSize: 28),
       ),
       colorScheme: ColorScheme.light(
-        primary: const Color(0xFFdfe7e7),
         primaryContainer: _primarySwatchColors[100]!,
         secondary: _primarySwatchColors[700]!,
         secondaryContainer: _primarySwatchColors[100]!,
-        error: const Color(0xFFeb5757),
+        error: ProjectColors.error,
         onPrimary: Colors.black,
         onSecondary: Colors.white,
         onSurface: Colors.black,
@@ -37,13 +37,61 @@ class RPCTheme {
         onError: Colors.white,
         brightness: Brightness.light,
       ),
-      textTheme: const TextTheme(
-        headline6: TextStyle(
+      textTheme: TextTheme(
+        headline1: TextStyle(
+          fontSize: 128,
+          fontWeight: FontWeight.bold,
+          fontFamily: 'Inter',
+          color: _primarySwatchColors[800]!,
+        ),
+        headline2: TextStyle(
+          fontSize: 64,
+          fontWeight: FontWeight.bold,
+          fontFamily: 'Inter',
+          color: _primarySwatchColors[800]!,
+        ),
+        headline3: TextStyle(
+          fontSize: 48,
+          fontWeight: FontWeight.bold,
+          fontFamily: 'Inter',
+          color: _primarySwatchColors[800]!,
+        ),
+        headline4: TextStyle(
+          fontSize: 32,
+          fontWeight: FontWeight.bold,
+          fontFamily: 'Inter',
+          color: _primarySwatchColors[800]!,
+        ),
+        headline5: TextStyle(
           fontSize: 24,
           fontWeight: FontWeight.bold,
+          fontFamily: 'Inter',
+          color: _primarySwatchColors[800]!,
         ),
-        bodyText1: TextStyle(
+        headline6: const TextStyle(
+          fontSize: 24,
+          fontWeight: FontWeight.bold,
+          fontFamily: 'Inter',
+        ),
+        bodyText1: const TextStyle(
           fontSize: 16,
+          fontFamily: 'Inter',
+        ),
+        bodyText2: const TextStyle(
+          fontSize: 14,
+          fontFamily: 'Inter',
+        ),
+        button: const TextStyle(
+          fontSize: 14,
+          fontFamily: 'Inter',
+        ),
+        caption: const TextStyle(
+          fontSize: 12,
+          fontFamily: 'Inter',
+        ),
+        overline: const TextStyle(
+          fontSize: 10,
+          fontFamily: 'Inter',
         ),
       ),
       buttonTheme: const ButtonThemeData(splashColor: Colors.transparent));
