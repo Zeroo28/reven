@@ -73,7 +73,7 @@ class _HomeState extends State<Home> {
     );
   }
 
-  Center buildErrorWidget() {
+  Widget buildErrorWidget() {
     return const Center(
       child: Text('Unknown state, please create an issue on GitHub :C'),
     );
