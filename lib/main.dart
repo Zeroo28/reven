@@ -1,12 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:window_manager/window_manager.dart';
 
-import 'screens/home/cubit/navigation_cubit.dart';
-import 'screens/home/home.dart';
+import 'presentation/screens/home/home.dart';
+import 'presentation/theme.dart';
 import 'utlis/constants.dart';
 
 void main() {
-  runApp(const MyApp());
+  WidgetsFlutterBinding.ensureInitialized();
+  windowManager.ensureInitialized();
+
+  const options = WindowOptions(
+    minimumSize: Size(800, 600),
+    title: 'Discord RPC',
+    fullScreen: false,
+  );
+
+  windowManager.waitUntilReadyToShow(options, () async {
+    runApp(const MyApp());
+  });
 }
 
 class MyApp extends StatelessWidget {
@@ -14,19 +25,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider<NavigationCubit>(
-          create: (context) => NavigationCubit(),
-        ),
-      ],
-      child: MaterialApp(
-        title: Strings.appName,
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
-        home: const Home(),
-      ),
+    return MaterialApp(
+      title: Strings.appName,
+      theme: RPCTheme.lightTheme,
+      home: const Home(),
     );
   }
 }
