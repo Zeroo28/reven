@@ -2,26 +2,42 @@
 
 Another Discord RPC client, cuz why not?
 
+You can download the app from [releases](https://github.com/Zeroo28/discord_rpc/releases/) or [build](#getting-started) your own client by following the steps below.
+
+## Requirements
+
+1. [Flutter](https://docs.flutter.dev/get-started/install)
+2. Git
+
+## Getting started
+
+Make sure you have all of the requirements installed on your machine before proceeding.
+
+```sh
+git clone https://github.com/Zeroo28/discord_rpc
+cd discord_rpc
+flutter pub get
+flutter build <your platform>
+```
+
+*Your build artifacts will be in the `build` directory. 
+
+*_Flutter only supports to bulid an application for your own platform._
+
+**Todo:** Create scripts to build application and package it.
+
 ## Contributing
 
-Make sure you have [Flutter](https://flutter.dev/) installed on your machine, or install [flutter](https://docs.flutter.dev/get-started/install) :D
-
--   Clone this repository : `git clone https://github.com/Zeroo28/discord_rpc`
--   Switch to dev branch : `git checkout dev`
+-   Fork this repository.
+-   Work on your super cool changes/features.
 -   Commit your changes : `git commit -am "my commit message"`
 -   Push your branch : `git push origin dev`
+-   And, open a pull request on GitHub.
 
-Or, if you want to add a new feature:
+Flutter documentation is available [here](https://docs.flutter.dev/).
 
--   Create a new branch: `git checkout -b my-new-feature`
--   Commit your changes: `git commit -am "my new feature"`
--   Push your branch: `git push origin my-new-feature`
--   Submit a pull request.
+## Known Issues
 
----
+Please dont make a new issue if it is already mentioned here.
 
-<div align="center">
-    <a href="https://discord.gg/srP9yaHrWs">
-        <img src="https://canary.discordapp.com/api/guilds/987766856507080805/embed.png" alt="Discord server">
-    </a>
-</div>
+None at the moment :)
