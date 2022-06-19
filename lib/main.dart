@@ -9,8 +9,11 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
   windowManager.ensureInitialized();
 
-  const options = WindowOptions(
-    minimumSize: Size(800, 600),
+  final options = WindowOptions(
+    minimumSize: Size(
+      ProjectIntegers.minWindowHeight.toDouble(),
+      ProjectIntegers.minWindowWidth.toDouble(),
+    ),
     title: 'Discord RPC',
     fullScreen: false,
   );
@@ -26,7 +29,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: Strings.appName,
+      title: ProjectStrings.appName,
       theme: RPCTheme.lightTheme,
       home: const Home(),
     );
