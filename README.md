@@ -13,6 +13,8 @@ You can download the app from [releases](https://github.com/Zeroo28/discord_rpc/
 
 Make sure you have all of the requirements installed on your machine before proceeding.
 
+To get started with flutter refer their [documentation](https://docs.flutter.dev/).
+
 ```sh
 git clone https://github.com/Zeroo28/discord_rpc
 cd discord_rpc
@@ -29,12 +31,11 @@ flutter build <your platform>
 ## Contributing
 
 -   Fork this repository.
+-   Create a new branch: `git checkout -b <my-super-cool-feature>`
 -   Work on your super cool changes/features.
--   Commit your changes : `git commit -am "my commit message"`
+-   Commit your changes : `git commit -am "Added a new feature"`
 -   Push your branch : `git push origin dev`
 -   And, open a pull request on GitHub.
-
-Flutter documentation is available [here](https://docs.flutter.dev/).
 
 ## Known Issues
 
