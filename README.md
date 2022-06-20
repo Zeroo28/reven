@@ -24,7 +24,7 @@ flutter build <your platform>
 
 *Your build artifacts will be in the `build` directory. 
 
-*_Flutter only supports to build an application for your platform._
+*_Flutter only supports building an application for your platform._
 
 **Todo:** Create scripts to build the application and package it.
 
