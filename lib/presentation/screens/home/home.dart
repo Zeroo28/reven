@@ -47,7 +47,7 @@ class _HomeState extends State<Home> {
           )
         : Center(
             child: Text(
-              'Window too small!',
+              ProjectStrings.smallWinError,
               style: theme.textTheme.headline3,
             ),
           );
@@ -57,7 +57,7 @@ class _HomeState extends State<Home> {
     return RichText(
       overflow: TextOverflow.fade,
       text: TextSpan(
-        text: 'Discord',
+        text: ProjectStrings.discord,
         style: theme.appBarTheme.titleTextStyle?.copyWith(
           color: theme.colorScheme.onBackground,
           fontWeight: FontWeight.w600,
@@ -82,7 +82,7 @@ class _HomeState extends State<Home> {
       child: Column(
         children: [
           Text(
-            'Status',
+            ProjectStrings.status,
             style: theme.textTheme.headline5?.copyWith(
               fontWeight: FontWeight.w600,
             ),
@@ -92,7 +92,7 @@ class _HomeState extends State<Home> {
             child: FittedBox(
               fit: BoxFit.fitWidth,
               child: Text(
-                random ? 'Running' : 'Invisible',
+                random ? ProjectStrings.status1 : ProjectStrings.status2,
                 style: theme.textTheme.headline1?.copyWith(
                   fontWeight: FontWeight.w700,
                 ),

@@ -7,6 +7,15 @@ class ProjectStrings {
   static const String helloWorld = "Hello World";
   static const String home = "Home";
   static const String settings = "Settings";
+  static const String discord = "Discord";
+  static const String discordRpc = "Discord RPC";
+  static const String status = "Status";
+  /// Running
+  static const String status1 = "Running";
+  /// Offline
+  static const String status2 = "Offline";
+
+  static const String smallWinError = "Window is too small!";
 }
 
 class ProjectColors {

@@ -14,7 +14,7 @@ void main() {
       ProjectIntegers.minWindowHeight.toDouble(),
       ProjectIntegers.minWindowWidth.toDouble(),
     ),
-    title: 'Discord RPC',
+    title: ProjectStrings.discordRpc,
     fullScreen: false,
   );
 

@@ -16,83 +16,84 @@ class RPCTheme {
   };
 
   static final ThemeData lightTheme = ThemeData(
-      primarySwatch: const MaterialColor(0xFFFFFFFF, _primarySwatchColors),
+    primarySwatch: const MaterialColor(0xFFFFFFFF, _primarySwatchColors),
+    brightness: Brightness.light,
+    backgroundColor: Colors.white,
+    scaffoldBackgroundColor: _primarySwatchColors[50],
+    appBarTheme: AppBarTheme(
+      backgroundColor: _primarySwatchColors[50],
+      elevation: 0,
+      titleTextStyle: const TextStyle(color: Colors.black, fontSize: 28),
+    ),
+    colorScheme: ColorScheme.light(
+      primaryContainer: _primarySwatchColors[100]!,
+      secondary: _primarySwatchColors[700]!,
+      secondaryContainer: _primarySwatchColors[100]!,
+      error: ProjectColors.error,
+      onPrimary: Colors.black,
+      onSecondary: Colors.white,
+      onSurface: Colors.black,
+      onBackground: Colors.black,
+      onError: Colors.white,
       brightness: Brightness.light,
-      backgroundColor: Colors.white,
-      scaffoldBackgroundColor: _primarySwatchColors[50],
-      appBarTheme: AppBarTheme(
-        backgroundColor: _primarySwatchColors[50],
-        elevation: 0,
-        titleTextStyle: const TextStyle(color: Colors.black, fontSize: 28),
+    ),
+    textTheme: TextTheme(
+      headline1: TextStyle(
+        fontSize: 128,
+        fontWeight: FontWeight.bold,
+        fontFamily: 'Inter',
+        color: _primarySwatchColors[800]!,
       ),
-      colorScheme: ColorScheme.light(
-        primaryContainer: _primarySwatchColors[100]!,
-        secondary: _primarySwatchColors[700]!,
-        secondaryContainer: _primarySwatchColors[100]!,
-        error: ProjectColors.error,
-        onPrimary: Colors.black,
-        onSecondary: Colors.white,
-        onSurface: Colors.black,
-        onBackground: Colors.black,
-        onError: Colors.white,
-        brightness: Brightness.light,
+      headline2: TextStyle(
+        fontSize: 64,
+        fontWeight: FontWeight.bold,
+        fontFamily: 'Inter',
+        color: _primarySwatchColors[800]!,
       ),
-      textTheme: TextTheme(
-        headline1: TextStyle(
-          fontSize: 128,
-          fontWeight: FontWeight.bold,
-          fontFamily: 'Inter',
-          color: _primarySwatchColors[800]!,
-        ),
-        headline2: TextStyle(
-          fontSize: 64,
-          fontWeight: FontWeight.bold,
-          fontFamily: 'Inter',
-          color: _primarySwatchColors[800]!,
-        ),
-        headline3: TextStyle(
-          fontSize: 48,
-          fontWeight: FontWeight.bold,
-          fontFamily: 'Inter',
-          color: _primarySwatchColors[800]!,
-        ),
-        headline4: TextStyle(
-          fontSize: 32,
-          fontWeight: FontWeight.bold,
-          fontFamily: 'Inter',
-          color: _primarySwatchColors[800]!,
-        ),
-        headline5: TextStyle(
-          fontSize: 24,
-          fontWeight: FontWeight.bold,
-          fontFamily: 'Inter',
-          color: _primarySwatchColors[800]!,
-        ),
-        headline6: const TextStyle(
-          fontSize: 24,
-          fontWeight: FontWeight.bold,
-          fontFamily: 'Inter',
-        ),
-        bodyText1: const TextStyle(
-          fontSize: 16,
-          fontFamily: 'Inter',
-        ),
-        bodyText2: const TextStyle(
-          fontSize: 14,
-          fontFamily: 'Inter',
-        ),
-        button: const TextStyle(
-          fontSize: 14,
-          fontFamily: 'Inter',
-        ),
-        caption: const TextStyle(
-          fontSize: 12,
-          fontFamily: 'Inter',
-        ),
-        overline: const TextStyle(
-          fontSize: 10,
-          fontFamily: 'Inter',
-        ),
+      headline3: TextStyle(
+        fontSize: 48,
+        fontWeight: FontWeight.bold,
+        fontFamily: 'Inter',
+        color: _primarySwatchColors[800]!,
       ),
-      buttonTheme: const ButtonThemeData(splashColor: Colors.transparent));
+      headline4: TextStyle(
+        fontSize: 32,
+        fontWeight: FontWeight.bold,
+        fontFamily: 'Inter',
+        color: _primarySwatchColors[800]!,
+      ),
+      headline5: TextStyle(
+        fontSize: 24,
+        fontWeight: FontWeight.bold,
+        fontFamily: 'Inter',
+        color: _primarySwatchColors[800]!,
+      ),
+      headline6: const TextStyle(
+        fontSize: 24,
+        fontWeight: FontWeight.bold,
+        fontFamily: 'Inter',
+      ),
+      bodyText1: const TextStyle(
+        fontSize: 16,
+        fontFamily: 'Inter',
+      ),
+      bodyText2: const TextStyle(
+        fontSize: 14,
+        fontFamily: 'Inter',
+      ),
+      button: const TextStyle(
+        fontSize: 14,
+        fontFamily: 'Inter',
+      ),
+      caption: const TextStyle(
+        fontSize: 12,
+        fontFamily: 'Inter',
+      ),
+      overline: const TextStyle(
+        fontSize: 10,
+        fontFamily: 'Inter',
+      ),
+    ),
+    buttonTheme: const ButtonThemeData(splashColor: Colors.transparent),
+  );
 }
