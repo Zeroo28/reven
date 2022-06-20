@@ -1,5 +1,6 @@
-import 'package:discord_rpc/utlis/constants.dart';
 import 'package:flutter/material.dart';
+
+import '../utlis/constants.dart';
 
 class RPCTheme {
   static const Map<int, Color> _primarySwatchColors = {

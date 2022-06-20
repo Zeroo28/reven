@@ -1,7 +1,8 @@
 import 'dart:math';
 
-import 'package:discord_rpc/utlis/constants.dart';
 import 'package:flutter/material.dart';
+
+import '../../../utlis/constants.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -64,7 +65,7 @@ class _HomeState extends State<Home> {
         ),
         children: [
           TextSpan(
-            text: ' Rich Presence',
+            text: " ${ProjectStrings.rpc}",
             style: theme.appBarTheme.titleTextStyle?.copyWith(
               color: theme.colorScheme.onBackground,
               fontWeight: FontWeight.normal,
