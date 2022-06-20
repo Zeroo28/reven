@@ -9,6 +9,7 @@ class ProjectStrings {
   static const String settings = "Settings";
   static const String discord = "Discord";
   static const String discordRpc = "Discord RPC";
+  static const String rpc = "Rich Presence";
   static const String status = "Status";
   /// Running
   static const String status1 = "Running";
