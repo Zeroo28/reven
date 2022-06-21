@@ -1,37 +1,44 @@
-## Welcome to GitHub Pages
+# Discord RPC client
 
-You can use the [editor on GitHub](https://github.com/Zeroo28/discord_rpc/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+Another Discord RPC client, cuz why not?
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+You can download the app from [releases](https://github.com/Zeroo28/discord_rpc/releases/) or [build](#getting-started) your client by following the steps below.
 
-### Markdown
+## Requirements
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+1. [Flutter](https://docs.flutter.dev/get-started/install)
+2. Git
 
-```markdown
-Syntax highlighted code block
+## Getting started
 
-# Header 1
-## Header 2
-### Header 3
+Make sure you have all of the requirements installed on your machine before proceeding.
 
-- Bulleted
-- List
+To get started with flutter refer to their [documentation](https://docs.flutter.dev/).
 
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+```sh
+git clone https://github.com/Zeroo28/discord_rpc
+cd discord_rpc
+flutter pub get
+flutter build <your platform>
 ```
 
-For more details see [Basic writing and formatting syntax](https://docs.github.com/en/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax).
+*Your build artifacts will be in the `build` directory. 
 
-### Jekyll Themes
+*_Flutter only supports building an application for your platform._
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/Zeroo28/discord_rpc/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+**Todo:** Create scripts to build the application and package it.
 
-### Support or Contact
+## Contributing
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+-   Fork this repository.
+-   Create a new branch: `git checkout -b <my-super-cool-feature>`
+-   Work on your super cool changes/features.
+-   Commit your changes: `git commit -am "Added a new feature"`
+-   Push your branch: `git push origin dev`
+-   And, open a pull request on GitHub.
+
+## Known Issues
+
+Please don't make a new issue if it is already mentioned here.
+
+None at the moment :)
