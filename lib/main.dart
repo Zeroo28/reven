@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:window_manager/window_manager.dart';
+import 'package:dart_discord_rpc/dart_discord_rpc.dart';
 
 import 'presentation/screens/home/home.dart';
 import 'presentation/theme.dart';
@@ -7,6 +8,7 @@ import 'utlis/constants.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
+  // DiscordRPC.initialize();
   windowManager.ensureInitialized();
 
   final options = WindowOptions(
