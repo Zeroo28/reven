@@ -44,7 +44,7 @@ class _HomeState extends State<Home> {
           splashColor: Colors.transparent,
           splashRadius: null,
           onPressed: () {
-            logger.d('Navigate to settings screen', null, null);
+            logger.d('Navigate to settings screen');
           },
           iconSize: 32,
           icon: Icon(
