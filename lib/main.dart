@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_storage/get_storage.dart';
@@ -24,13 +26,23 @@ void main() async {
     fullScreen: false,
   );
 
+  bool hasGtk4Support = (await Process.run('gsettings', [
+    'get',
+    'org.gnome.desktop.wm.preferences',
+    'titlebar-uses-system-font'
+  ]))
+      .stdout
+      .toString()
+      .trim()=='true';
+
   windowManager.waitUntilReadyToShow(options, () async {
-    runApp(const MyApp());
+    runApp(MyApp(hasGtk4Support));
   });
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  final bool gtk4;
+  const MyApp(this.gtk4, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -39,11 +51,21 @@ class MyApp extends StatelessWidget {
         BlocProvider<RpcCubit>(create: (context) => RpcCubit()),
         BlocProvider<HomeCubit>(create: ((context) => HomeCubit())),
       ],
-      child: MaterialApp(
-        title: ProjectStrings.appName,
-        theme: RPCTheme.lightTheme,
-        home: const Home(),
-      ),
+      child: Builder(builder: (ctx) {
+        return ClipRRect(
+          borderRadius: gtk4
+              ? const BorderRadius.only(
+                  bottomLeft: Radius.circular(20),
+                  bottomRight: Radius.circular(20),
+                )
+              : BorderRadius.zero,
+          child: MaterialApp(
+            title: ProjectStrings.appName,
+            theme: RPCTheme.lightTheme,
+            home: const Home(),
+          ),
+        );
+      }),
     );
   }
 }
