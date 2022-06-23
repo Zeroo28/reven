@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:logger/logger.dart';
 
 import '../../../utlis/constants.dart';
 
@@ -12,6 +13,14 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  final logger = Logger(
+      printer: PrettyPrinter(
+    colors: false,
+    printEmojis: false,
+    noBoxingByDefault: true,
+    errorMethodCount: 0,
+  ));
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -24,7 +33,9 @@ class _HomeState extends State<Home> {
           hoverColor: Colors.transparent,
           splashColor: Colors.transparent,
           splashRadius: null,
-          onPressed: () {},
+          onPressed: () {
+            logger.d('Navigate to settings screen', null, null);
+          },
           iconSize: 32,
           icon: Icon(
             Icons.settings,
@@ -39,19 +50,11 @@ class _HomeState extends State<Home> {
   }
 
   Widget _buildBody(ThemeData theme, BuildContext context, Size size) {
-    return size.height > ProjectIntegers.minWindowHeight &&
-            size.width > ProjectIntegers.minWindowWidth
-        ? ListView(
-            children: [
-              _buildHeader(theme, context, size),
-            ],
-          )
-        : Center(
-            child: Text(
-              ProjectStrings.smallWinError,
-              style: theme.textTheme.headline3,
-            ),
-          );
+    return ListView(
+      children: [
+        _buildHeader(theme, context, size),
+      ],
+    );
   }
 
   Widget _buildTitle(ThemeData theme) {
