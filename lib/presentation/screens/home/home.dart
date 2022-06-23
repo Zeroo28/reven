@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
 
@@ -13,6 +14,8 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  late bool isDebug;
+
   final logger = Logger(
       printer: PrettyPrinter(
     colors: false,
@@ -20,6 +23,12 @@ class _HomeState extends State<Home> {
     noBoxingByDefault: true,
     errorMethodCount: 0,
   ));
+
+  @override
+  void initState() {
+    isDebug = kDebugMode;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
