@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:window_manager/window_manager.dart';
 
-import 'presentation/screens/home/cubit/rpc_cubit.dart';
+import 'presentation/screens/home/cubit/home/home_cubit.dart';
+import 'presentation/screens/home/cubit/rpc/rpc_cubit.dart';
 import 'presentation/screens/home/home.dart';
 import 'presentation/theme.dart';
 import 'utlis/constants.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // DiscordRPC.initialize();
+  await GetStorage.init();
   windowManager.ensureInitialized();
 
   final options = WindowOptions(
@@ -31,8 +34,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => RpcCubit(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<RpcCubit>(create: (context) => RpcCubit()),
+        BlocProvider<HomeCubit>(create: ((context) => HomeCubit())),
+      ],
       child: MaterialApp(
         title: ProjectStrings.appName,
         theme: RPCTheme.lightTheme,

@@ -2,8 +2,10 @@ import 'dart:math';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:logger/logger.dart';
 
+import 'cubit/home/home_cubit.dart';
 import '../../../utlis/constants.dart';
 
 class Home extends StatefulWidget {
@@ -15,6 +17,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   late bool isDebug;
+  late HomeCubit _homeCubit;
 
   final logger = Logger(
     printer: PrettyPrinter(
@@ -33,6 +36,7 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
+    _homeCubit = BlocProvider.of<HomeCubit>(context);
     final theme = Theme.of(context);
     final size = MediaQuery.of(context).size;
     return Scaffold(
@@ -60,10 +64,20 @@ class _HomeState extends State<Home> {
   }
 
   Widget _buildBody(ThemeData theme, BuildContext context, Size size) {
-    return ListView(
-      children: [
-        _buildHeader(theme, context, size),
-      ],
+    return BlocBuilder<HomeCubit, HomeState>(
+      builder: (context, state) {
+        if (state is HomeLoading) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        } else if (state is HomeLoaded) {
+          return _buildHeader(theme, context, size, state);
+        } else {
+          return const Center(
+            child: Text('Unknown state'),
+          );
+        }
+      },
     );
   }
 
@@ -89,37 +103,49 @@ class _HomeState extends State<Home> {
     );
   }
 
-  Widget _buildHeader(ThemeData theme, BuildContext ctx, Size size) {
+  Widget _buildHeader(
+    ThemeData theme,
+    BuildContext ctx,
+    Size size,
+    HomeLoaded state,
+  ) {
     final random = Random().nextBool();
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 36),
-      child: Column(
-        children: [
-          Text(
-            ProjectStrings.status,
-            style: theme.textTheme.headline5?.copyWith(
-              fontWeight: FontWeight.w600,
+    if (state.firstRun) {
+      _homeCubit.setCompletedConfig();
+      return const Center(
+        child: Text('First run'),
+      );
+    } else {
+      return Padding(
+        padding: const EdgeInsets.symmetric(vertical: 36),
+        child: Column(
+          children: [
+            Text(
+              ProjectStrings.status,
+              style: theme.textTheme.headline5?.copyWith(
+                fontWeight: FontWeight.w600,
+              ),
             ),
-          ),
-          SizedBox(
-            width: size.width * .3,
-            child: FittedBox(
-              fit: BoxFit.fitWidth,
-              child: Text(
-                random ? ProjectStrings.status1 : ProjectStrings.status2,
-                style: theme.textTheme.headline1?.copyWith(
-                  fontWeight: FontWeight.w700,
+            SizedBox(
+              width: size.width * .3,
+              child: FittedBox(
+                fit: BoxFit.fitWidth,
+                child: Text(
+                  random ? ProjectStrings.status1 : ProjectStrings.status2,
+                  style: theme.textTheme.headline1?.copyWith(
+                    fontWeight: FontWeight.w700,
+                  ),
                 ),
               ),
             ),
-          ),
-          Container(
-            color: random ? ProjectColors.success : theme.primaryColorDark,
-            height: 4,
-            width: size.width * .25,
-          ),
-        ],
-      ),
-    );
+            Container(
+              color: random ? ProjectColors.success : theme.primaryColorDark,
+              height: 4,
+              width: size.width * .25,
+            ),
+          ],
+        ),
+      );
+    }
   }
 }

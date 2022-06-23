@@ -28,3 +28,7 @@ class ProjectIntegers {
   static const minWindowWidth = 600;
   static const minWindowHeight = 800;
 }
+
+class StorageKeys {
+  static const String firstRun = 'firstRun';
+}
