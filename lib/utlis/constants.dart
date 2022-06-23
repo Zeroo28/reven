@@ -11,8 +11,10 @@ class ProjectStrings {
   static const String discordRpc = "Discord RPC";
   static const String rpc = "Rich Presence";
   static const String status = "Status";
+
   /// Running
   static const String status1 = "Running";
+
   /// Offline
   static const String status2 = "Offline";
 
@@ -30,5 +32,6 @@ class ProjectIntegers {
 }
 
 class StorageKeys {
+  static const String configBox = "config";
   static const String firstRun = 'firstRun';
 }

@@ -12,7 +12,7 @@ import 'utlis/constants.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // DiscordRPC.initialize();
-  await GetStorage.init();
+  await GetStorage.init(StorageKeys.configBox);
   windowManager.ensureInitialized();
 
   final options = WindowOptions(
