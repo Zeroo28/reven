@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:window_manager/window_manager.dart';
-import 'package:dart_discord_rpc/dart_discord_rpc.dart';
 
+import 'presentation/screens/home/cubit/rpc_cubit.dart';
 import 'presentation/screens/home/home.dart';
 import 'presentation/theme.dart';
 import 'utlis/constants.dart';
@@ -30,10 +31,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: ProjectStrings.appName,
-      theme: RPCTheme.lightTheme,
-      home: const Home(),
+    return BlocProvider(
+      create: (context) => RpcCubit(),
+      child: MaterialApp(
+        title: ProjectStrings.appName,
+        theme: RPCTheme.lightTheme,
+        home: const Home(),
+      ),
     );
   }
 }

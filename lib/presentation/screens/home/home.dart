@@ -17,12 +17,13 @@ class _HomeState extends State<Home> {
   late bool isDebug;
 
   final logger = Logger(
-      printer: PrettyPrinter(
-    colors: false,
-    printEmojis: false,
-    noBoxingByDefault: true,
-    errorMethodCount: 0,
-  ));
+    printer: PrettyPrinter(
+      colors: false,
+      printEmojis: false,
+      noBoxingByDefault: true,
+      errorMethodCount: 0,
+    ),
+  );
 
   @override
   void initState() {
