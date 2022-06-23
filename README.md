@@ -33,7 +33,7 @@ flutter build <your platform>
 -   Fork this repository.
 -   Create a new branch: `git checkout -b <my-super-cool-feature>`
 -   Work on your super cool changes/features.
--   Commit your changes: `git commit -am "Added a new feature"`
+-   Commit your changes: `git commit -am "Feat: Added a new feature"`
 -   Push your branch: `git push origin dev`
 -   And, open a pull request on GitHub.
 
@@ -41,4 +41,4 @@ flutter build <your platform>
 
 Please don't make a new issue if it is already mentioned here.
 
-None at the moment :)
+- Can't use the custom discord RPC application id.
