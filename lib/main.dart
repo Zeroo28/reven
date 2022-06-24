@@ -27,13 +27,14 @@ void main() async {
   );
 
   bool hasGtk4Support = (await Process.run('gsettings', [
-    'get',
-    'org.gnome.desktop.wm.preferences',
-    'titlebar-uses-system-font'
-  ]))
-      .stdout
-      .toString()
-      .trim()=='true';
+        'get',
+        'org.gnome.desktop.wm.preferences',
+        'titlebar-uses-system-font'
+      ]))
+          .stdout
+          .toString()
+          .trim() ==
+      'true';
 
   windowManager.waitUntilReadyToShow(options, () async {
     runApp(MyApp(hasGtk4Support));
@@ -55,8 +56,8 @@ class MyApp extends StatelessWidget {
         return ClipRRect(
           borderRadius: gtk4
               ? const BorderRadius.only(
-                  bottomLeft: Radius.circular(20),
-                  bottomRight: Radius.circular(20),
+                  bottomLeft: Radius.circular(ProjectIntegers.gtkWindowBorderRadius),
+                  bottomRight: Radius.circular(ProjectIntegers.gtkWindowBorderRadius),
                 )
               : BorderRadius.zero,
           child: MaterialApp(

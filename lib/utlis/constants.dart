@@ -29,6 +29,7 @@ class ProjectColors {
 class ProjectIntegers {
   static const minWindowWidth = 600;
   static const minWindowHeight = 800;
+  static const double gtkWindowBorderRadius = 12;
 }
 
 class StorageKeys {
