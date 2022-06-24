@@ -50,3 +50,7 @@ app.*.map.json
 *.drawio
 *-flowchart.*
 *_flowchart.*
+
+# VS Code related stuff
+# there are no configuration files needed for flutter so i have ignored the whole directory
+.vscode/
