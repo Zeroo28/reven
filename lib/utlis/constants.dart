@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:window_manager/window_manager.dart';
 
 class ProjectStrings {
   static const String about = "About";
@@ -27,12 +28,24 @@ class ProjectColors {
 }
 
 class ProjectIntegers {
-  static const minWindowWidth = 600;
-  static const minWindowHeight = 800;
+  static const double minWindowWidth = 600;
+  static const double minWindowHeight = 800;
   static const double gtkWindowBorderRadius = 12;
 }
 
 class StorageKeys {
   static const String configBox = "config";
+  static const String appDataBox = "applicationBox";
   static const String firstRun = 'firstRun';
+}
+
+class Configurations {
+  static const windowConfig = WindowOptions(
+    minimumSize: Size(
+      ProjectIntegers.minWindowHeight,
+      ProjectIntegers.minWindowWidth,
+    ),
+    title: ProjectStrings.discordRpc,
+    fullScreen: false,
+  );
 }

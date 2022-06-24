@@ -14,19 +14,10 @@ import 'utlis/constants.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // DiscordRPC.initialize();
-  await GetStorage.init(StorageKeys.configBox);
+  await GetStorage.init(StorageKeys.appDataBox);
   windowManager.ensureInitialized();
 
-  final options = WindowOptions(
-    minimumSize: Size(
-      ProjectIntegers.minWindowHeight.toDouble(),
-      ProjectIntegers.minWindowWidth.toDouble(),
-    ),
-    title: ProjectStrings.discordRpc,
-    fullScreen: false,
-  );
-
-  bool hasGtk4Support = (await Process.run('gsettings', [
+  final hasGtk4Support = (await Process.run('gsettings', [
         'get',
         'org.gnome.desktop.wm.preferences',
         'titlebar-uses-system-font'
@@ -36,14 +27,15 @@ void main() async {
           .trim() ==
       'true';
 
-  windowManager.waitUntilReadyToShow(options, () async {
-    runApp(MyApp(hasGtk4Support));
-  });
+  windowManager.waitUntilReadyToShow(
+    Configurations.windowConfig,
+    () async => runApp(DiscordRPCApp(hasGtk4Support)),
+  );
 }
 
-class MyApp extends StatelessWidget {
-  final bool gtk4;
-  const MyApp(this.gtk4, {Key? key}) : super(key: key);
+class DiscordRPCApp extends StatelessWidget {
+  final bool gtk4Supported;
+  const DiscordRPCApp(this.gtk4Supported, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -54,10 +46,12 @@ class MyApp extends StatelessWidget {
       ],
       child: Builder(builder: (ctx) {
         return ClipRRect(
-          borderRadius: gtk4
+          borderRadius: gtk4Supported
               ? const BorderRadius.only(
-                  bottomLeft: Radius.circular(ProjectIntegers.gtkWindowBorderRadius),
-                  bottomRight: Radius.circular(ProjectIntegers.gtkWindowBorderRadius),
+                  bottomLeft:
+                      Radius.circular(ProjectIntegers.gtkWindowBorderRadius),
+                  bottomRight:
+                      Radius.circular(ProjectIntegers.gtkWindowBorderRadius),
                 )
               : BorderRadius.zero,
           child: MaterialApp(
