@@ -55,3 +55,4 @@ flutter build <your platform>
 Please don't make a new issue if it is already mentioned here.
 
 -   Can't use the custom discord RPC application id.
+-   Docs to use custom discord rpc application id are not available.
