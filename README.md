@@ -11,9 +11,9 @@ You can download the app from [releases](https://github.com/Zeroo28/discord_rpc/
 
 ## Getting started
 
-Make sure you have all of the requirements installed on your machine before proceeding.
+Make sure you have all the requirements installed on your machine before proceeding.
 
-To get started with flutter refer to their [documentation](https://docs.flutter.dev/).
+To get started, refer to flutter [documentation](https://docs.flutter.dev/).
 
 ```sh
 git clone https://github.com/Zeroo28/discord_rpc
@@ -30,7 +30,7 @@ flutter build <your platform>
 
 ## Contributing
 
-#### Note: This project encourages the use of conventional commits. Get to know more about it [here](https://www.conventionalcommits.org/en/v1.0.0/).
+#### Note: This project encourages the use of conventional commits, [know more](https://www.conventionalcommits.org/en/v1.0.0/).
 
 <details>
 <summary>Example of a conventional commit.</summary>
@@ -48,11 +48,9 @@ flutter build <your platform>
 -   Create a new branch: `git checkout -b <my-super-cool-feature>`
 -   Commit your changes: `git commit -am "Feat: Added a new feature"`
 -   Push your branch: `git push origin dev`
--   And, open a pull request on GitHub.
+-   And open a pull request on GitHub.
 
 ## Known Issues
 
-Please don't make a new issue if it is already mentioned here.
-
 -   Can't use the custom discord RPC application id.
--   Docs to use custom discord rpc application id are not available.
+-   Docs to use custom discord RPC application id are not available.
