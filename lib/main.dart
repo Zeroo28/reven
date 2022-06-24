@@ -9,7 +9,7 @@ import 'presentation/screens/home/cubit/home/home_cubit.dart';
 import 'presentation/screens/home/cubit/rpc/rpc_cubit.dart';
 import 'presentation/screens/home/home.dart';
 import 'presentation/theme.dart';
-import 'utlis/constants.dart';
+import 'utils/constants.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
