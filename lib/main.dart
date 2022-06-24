@@ -45,15 +45,18 @@ class DiscordRPCApp extends StatelessWidget {
         BlocProvider<HomeCubit>(create: ((context) => HomeCubit())),
       ],
       child: Builder(builder: (ctx) {
-        return ClipRRect(
-          borderRadius: gtk4Supported
-              ? const BorderRadius.only(
-                  bottomLeft:
-                      Radius.circular(ProjectIntegers.gtkWindowBorderRadius),
-                  bottomRight:
-                      Radius.circular(ProjectIntegers.gtkWindowBorderRadius),
-                )
-              : BorderRadius.zero,
+        return Container(
+          decoration: BoxDecoration(
+            borderRadius: gtk4Supported
+                ? const BorderRadius.only(
+                    bottomLeft:
+                        Radius.circular(ProjectIntegers.gtkWindowBorderRadius),
+                    bottomRight:
+                        Radius.circular(ProjectIntegers.gtkWindowBorderRadius),
+                  )
+                : BorderRadius.zero,
+          ),
+          clipBehavior: Clip.antiAlias,
           child: MaterialApp(
             title: ProjectStrings.appName,
             theme: RPCTheme.lightTheme,
