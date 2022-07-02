@@ -4,29 +4,27 @@ Another Discord RPC client, cuz why not?
 
 You can download the app from [releases](https://github.com/Zeroo28/discord_rpc/releases/) or [build](#getting-started) your client by following the steps below.
 
-## Requirements
-
-1. [Flutter](https://docs.flutter.dev/get-started/install)
-2. Git
 
 ## Getting started
 
 Make sure you have all the requirements installed on your machine before proceeding.
 
-To get started, refer to flutter [documentation](https://docs.flutter.dev/).
+
+**Requirements**: [Flutter](https://docs.flutter.dev/get-started/install) and Git.
+
+
+For flutter-related questions/doubts, refer to their [documentation](https://docs.flutter.dev/).
+
+Then, clone the repository and install all dependencies.
 
 ```sh
 git clone https://github.com/Zeroo28/discord_rpc
 cd discord_rpc
 flutter pub get
-flutter build <your platform>
+flutter run
 ```
 
-\*Your build artifacts will be in the `build` directory.
-
 \*_Flutter only supports building an application for your platform._
-
-**Todo:** Create scripts to build the application and package it.
 
 ## Contributing
 
@@ -52,8 +50,7 @@ flutter build <your platform>
 
 ## Known Issues
 
--   Can't use the custom discord RPC application id.
--   Docs to use custom discord RPC application id are not available.
+None :D
 
 ## License
 
