@@ -26,3 +26,15 @@ class HomeLoaded extends HomeState {
   @override
   String toString() => 'HomeLoaded { firstRun: $firstRun }';
 }
+
+class HomeError extends HomeState {
+  final dynamic message;
+
+  const HomeError(this.message);
+
+  @override
+  List<Object> get props => [message];
+
+  @override
+  String toString() => 'HomeError { message: $message }';
+}
