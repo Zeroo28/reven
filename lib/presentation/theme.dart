@@ -27,8 +27,9 @@ class RPCTheme {
       titleTextStyle: const TextStyle(color: Colors.black, fontSize: 28),
     ),
     colorScheme: ColorScheme.light(
-      primaryContainer: _primarySwatchColors[100]!,
+      primary: _primarySwatchColors[500]!,
       secondary: _primarySwatchColors[700]!,
+      primaryContainer: _primarySwatchColors[100]!,
       secondaryContainer: _primarySwatchColors[100]!,
       error: PColors.error,
       onPrimary: Colors.white,
@@ -93,15 +94,6 @@ class RPCTheme {
       overline: const TextStyle(
         fontSize: 10,
         fontFamily: 'Inter',
-      ),
-    ),
-    buttonTheme: ButtonThemeData(
-      splashColor: Colors.transparent,
-      highlightColor: Colors.transparent,
-      buttonColor: _primarySwatchColors[50]!,
-      textTheme: ButtonTextTheme.primary,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(8),
       ),
     ),
   );
