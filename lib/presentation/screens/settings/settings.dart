@@ -8,7 +8,7 @@ class SettingsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Center(
-      child: Text(ProjectStrings.settings),
+      child: Text(Strings.settings),
     );
   }
 }
