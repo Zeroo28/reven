@@ -30,8 +30,8 @@ class PColors {
 }
 
 class Integers {
-  static const double minWindowWidth = 600;
-  static const double minWindowHeight = 800;
+  static const double maxWindowHeight = 720;
+  static const double maxWindowWidth = 1080;
   static const double gtkWindowBorderRadius = 12;
 }
 
@@ -43,12 +43,22 @@ class Keys {
 
 class Configurations {
   static const windowConfig = WindowOptions(
+    size: Size(
+      Integers.maxWindowWidth,
+      Integers.maxWindowHeight,
+    ),
+    maximumSize: Size(
+      Integers.maxWindowWidth,
+      Integers.maxWindowHeight,
+    ),
     minimumSize: Size(
-      Integers.minWindowHeight,
-      Integers.minWindowWidth,
+      Integers.maxWindowWidth,
+      Integers.maxWindowHeight,
     ),
     title: Strings.discordRpc,
+    titleBarStyle: TitleBarStyle.hidden,
     fullScreen: false,
+    center: true,
   );
 
   static const defaultRpcApplicationID = "989352288466386964";

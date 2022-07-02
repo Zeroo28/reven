@@ -17,25 +17,14 @@ void main() async {
   await GetStorage.init(Keys.appDataBox);
   windowManager.ensureInitialized();
 
-  final supportsGtk4 = (await Process.run('gsettings', [
-        'get',
-        'org.gnome.desktop.wm.preferences',
-        'titlebar-uses-system-font'
-      ]))
-          .stdout
-          .toString()
-          .trim() ==
-      'true';
-
   windowManager.waitUntilReadyToShow(
     Configurations.windowConfig,
-    () async => runApp(DiscordRPCApp(supportsGtk4)),
+    () async => runApp(const DiscordRPCApp()),
   );
 }
 
 class DiscordRPCApp extends StatelessWidget {
-  final bool gtk4Supported;
-  const DiscordRPCApp(this.gtk4Supported, {Key? key}) : super(key: key);
+  const DiscordRPCApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -45,22 +34,10 @@ class DiscordRPCApp extends StatelessWidget {
         BlocProvider<HomeCubit>(create: ((context) => HomeCubit())),
       ],
       child: Builder(builder: (ctx) {
-        return Container(
-          decoration: BoxDecoration(
-            borderRadius: gtk4Supported
-                ? const BorderRadius.only(
-                    bottomLeft: Radius.circular(Integers.gtkWindowBorderRadius),
-                    bottomRight:
-                        Radius.circular(Integers.gtkWindowBorderRadius),
-                  )
-                : BorderRadius.zero,
-          ),
-          clipBehavior: Clip.antiAlias,
-          child: MaterialApp(
-            title: Strings.appName,
-            theme: RPCTheme.lightTheme,
-            home: const Home(),
-          ),
+        return MaterialApp(
+          title: Strings.appName,
+          theme: RPCTheme.lightTheme,
+          home: const Home(),
         );
       }),
     );
