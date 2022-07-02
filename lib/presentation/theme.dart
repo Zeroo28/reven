@@ -30,8 +30,8 @@ class RPCTheme {
       primaryContainer: _primarySwatchColors[100]!,
       secondary: _primarySwatchColors[700]!,
       secondaryContainer: _primarySwatchColors[100]!,
-      error: ProjectColors.error,
-      onPrimary: Colors.black,
+      error: PColors.error,
+      onPrimary: Colors.white,
       onSecondary: Colors.white,
       onSurface: Colors.black,
       onBackground: Colors.black,
@@ -95,6 +95,14 @@ class RPCTheme {
         fontFamily: 'Inter',
       ),
     ),
-    buttonTheme: const ButtonThemeData(splashColor: Colors.transparent),
+    buttonTheme: ButtonThemeData(
+      splashColor: Colors.transparent,
+      highlightColor: Colors.transparent,
+      buttonColor: _primarySwatchColors[50]!,
+      textTheme: ButtonTextTheme.primary,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(8),
+      ),
+    ),
   );
 }

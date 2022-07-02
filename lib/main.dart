@@ -14,7 +14,7 @@ import 'utils/constants.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // DiscordRPC.initialize();
-  await GetStorage.init(StorageKeys.appDataBox);
+  await GetStorage.init(Keys.appDataBox);
   windowManager.ensureInitialized();
 
   final supportsGtk4 = (await Process.run('gsettings', [
@@ -49,16 +49,15 @@ class DiscordRPCApp extends StatelessWidget {
           decoration: BoxDecoration(
             borderRadius: gtk4Supported
                 ? const BorderRadius.only(
-                    bottomLeft:
-                        Radius.circular(ProjectIntegers.gtkWindowBorderRadius),
+                    bottomLeft: Radius.circular(Integers.gtkWindowBorderRadius),
                     bottomRight:
-                        Radius.circular(ProjectIntegers.gtkWindowBorderRadius),
+                        Radius.circular(Integers.gtkWindowBorderRadius),
                   )
                 : BorderRadius.zero,
           ),
           clipBehavior: Clip.antiAlias,
           child: MaterialApp(
-            title: ProjectStrings.appName,
+            title: Strings.appName,
             theme: RPCTheme.lightTheme,
             home: const Home(),
           ),
