@@ -17,7 +17,7 @@ void main() async {
   await GetStorage.init(StorageKeys.appDataBox);
   windowManager.ensureInitialized();
 
-  final hasGtk4Support = (await Process.run('gsettings', [
+  final supportsGtk4 = (await Process.run('gsettings', [
         'get',
         'org.gnome.desktop.wm.preferences',
         'titlebar-uses-system-font'
@@ -29,7 +29,7 @@ void main() async {
 
   windowManager.waitUntilReadyToShow(
     Configurations.windowConfig,
-    () async => runApp(DiscordRPCApp(hasGtk4Support)),
+    () async => runApp(DiscordRPCApp(supportsGtk4)),
   );
 }
 
