@@ -1,12 +1,10 @@
-import 'dart:math';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:logger/logger.dart';
 
 import 'cubit/home/home_cubit.dart';
-import '../../../utlis/constants.dart';
+import '../../../utils/constants.dart';
+import 'views/first_run.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -17,16 +15,8 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   late bool isDebug;
-  late HomeCubit _homeCubit;
-
-  final logger = Logger(
-    printer: PrettyPrinter(
-      colors: false,
-      printEmojis: false,
-      noBoxingByDefault: true,
-      errorMethodCount: 0,
-    ),
-  );
+  late HomeCubit _cubit;
+  BuildContext? _dialogContext;
 
   @override
   void initState() {
@@ -36,7 +26,7 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    _homeCubit = BlocProvider.of<HomeCubit>(context);
+    _cubit = BlocProvider.of<HomeCubit>(context);
     final theme = Theme.of(context);
     final size = MediaQuery.of(context).size;
     return Scaffold(
@@ -48,18 +38,32 @@ class _HomeState extends State<Home> {
           splashColor: Colors.transparent,
           splashRadius: null,
           onPressed: () {
-            logger.d('Navigate to settings screen');
+            _cubit.logger.d('Navigate to settings screen');
           },
           iconSize: 32,
           icon: Icon(
             Icons.settings,
-            color: (theme.buttonTheme.colorScheme?.background ??
-                    theme.textTheme.bodyText1?.color)
-                ?.withOpacity(.7),
+            color: theme.buttonTheme.colorScheme?.secondary,
           ),
         ),
       ),
       body: _buildBody(theme, context, size),
+      floatingActionButton: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          FloatingActionButton(
+            onPressed: _cubit.clearConfig,
+            tooltip: 'Clear config',
+            child: const Icon(Icons.clear_all_rounded),
+          ),
+          const SizedBox(width: 8),
+          FloatingActionButton(
+            onPressed: _cubit.initialize,
+            tooltip: 'Refresh',
+            child: const Icon(Icons.refresh_rounded),
+          ),
+        ],
+      ),
     );
   }
 
@@ -70,13 +74,20 @@ class _HomeState extends State<Home> {
           return const Center(
             child: CircularProgressIndicator(),
           );
-        } else if (state is HomeLoaded) {
-          return _buildHeader(theme, context, size, state);
-        } else {
+        }
+        if (state is HomeLoaded) {
+          return _buildHeader(context, state);
+        }
+        if (state is HomeError) {
           return const Center(
-            child: Text('Unknown state'),
+            child: Text(
+              'Please report this error on the GitHub repository by opening an issue.',
+            ),
           );
         }
+        return const Center(
+          child: Text('Unknown state'),
+        );
       },
     );
   }
@@ -85,14 +96,14 @@ class _HomeState extends State<Home> {
     return RichText(
       overflow: TextOverflow.fade,
       text: TextSpan(
-        text: ProjectStrings.discord,
+        text: Strings.discord,
         style: theme.appBarTheme.titleTextStyle?.copyWith(
           color: theme.colorScheme.onBackground,
           fontWeight: FontWeight.w600,
         ),
         children: [
           TextSpan(
-            text: " ${ProjectStrings.rpc}",
+            text: " ${Strings.rpc}",
             style: theme.appBarTheme.titleTextStyle?.copyWith(
               color: theme.colorScheme.onBackground,
               fontWeight: FontWeight.normal,
@@ -104,48 +115,39 @@ class _HomeState extends State<Home> {
   }
 
   Widget _buildHeader(
-    ThemeData theme,
     BuildContext ctx,
-    Size size,
     HomeLoaded state,
   ) {
-    final random = Random().nextBool();
+    final size = MediaQuery.of(ctx).size;
     if (state.firstRun) {
-      _homeCubit.setCompletedConfig();
-      return const Center(
-        child: Text('First run'),
-      );
-    } else {
-      return Padding(
-        padding: const EdgeInsets.symmetric(vertical: 36),
-        child: Column(
-          children: [
-            Text(
-              ProjectStrings.status,
-              style: theme.textTheme.headline5?.copyWith(
-                fontWeight: FontWeight.w600,
+      if (_dialogContext != null) {
+        _cubit.logger.d('Dialog exists');
+        try {
+          Navigator.pop(_dialogContext!);
+          // ignore: empty_catches
+        } catch (e) {}
+      }
+      Future.delayed(const Duration(seconds: 2), () {
+        showDialog(
+          context: ctx,
+          builder: (dialogCtx) {
+            _dialogContext = dialogCtx;
+            final horizontalMargin = size.width * 0.30;
+            final verticalMargin = size.height * 0.1;
+            return Container(
+              margin: EdgeInsets.symmetric(
+                horizontal: horizontalMargin,
+                vertical: verticalMargin,
               ),
-            ),
-            SizedBox(
-              width: size.width * .3,
-              child: FittedBox(
-                fit: BoxFit.fitWidth,
-                child: Text(
-                  random ? ProjectStrings.status1 : ProjectStrings.status2,
-                  style: theme.textTheme.headline1?.copyWith(
-                    fontWeight: FontWeight.w700,
-                  ),
-                ),
-              ),
-            ),
-            Container(
-              color: random ? ProjectColors.success : theme.primaryColorDark,
-              height: 4,
-              width: size.width * .25,
-            ),
-          ],
-        ),
-      );
+              child: const FirstRunView(),
+            );
+          },
+          barrierDismissible: true,
+        );
+      });
     }
+    return Center(
+      child: Text('First run: ${state.firstRun}'),
+    );
   }
 }

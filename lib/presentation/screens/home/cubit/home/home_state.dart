@@ -12,7 +12,7 @@ class HomeLoading extends HomeState {
   List<Object> get props => [];
 
   @override
-  String toString() => 'HomeLoading {}';
+  String toString() => 'HomeLoading { no properties }';
 }
 
 class HomeLoaded extends HomeState {
