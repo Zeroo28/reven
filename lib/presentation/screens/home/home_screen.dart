@@ -2,21 +2,19 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'cubit/home/home_cubit.dart';
+import 'cubit/home_cubit.dart';
 import '../../../utils/constants.dart';
-import 'views/first_run.dart';
 
-class Home extends StatefulWidget {
-  const Home({Key? key}) : super(key: key);
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({Key? key}) : super(key: key);
 
   @override
-  State<Home> createState() => _HomeState();
+  State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeState extends State<Home> {
+class _HomeScreenState extends State<HomeScreen> {
   late bool isDebug;
   late HomeCubit _cubit;
-  BuildContext? _dialogContext;
 
   @override
   void initState() {
@@ -38,7 +36,7 @@ class _HomeState extends State<Home> {
           splashColor: Colors.transparent,
           splashRadius: null,
           onPressed: () {
-            _cubit.logger.d('Navigate to settings screen');
+            Navigator.pushNamed(context, Routes.settings);
           },
           iconSize: 32,
           icon: Icon(
@@ -52,12 +50,14 @@ class _HomeState extends State<Home> {
         mainAxisSize: MainAxisSize.min,
         children: [
           FloatingActionButton(
+            heroTag: 'clear',
             onPressed: _cubit.clearConfig,
             tooltip: 'Clear config',
             child: const Icon(Icons.clear_all_rounded),
           ),
           const SizedBox(width: 8),
           FloatingActionButton(
+            heroTag: 'refresh',
             onPressed: _cubit.initialize,
             tooltip: 'Refresh',
             child: const Icon(Icons.refresh_rounded),
@@ -76,17 +76,15 @@ class _HomeState extends State<Home> {
           );
         }
         if (state is HomeLoaded) {
-          return _buildHeader(context, state);
+          return _buildLoadedScreen(context, state);
         }
         if (state is HomeError) {
           return const Center(
-            child: Text(
-              'Please report this error on the GitHub repository by opening an issue.',
-            ),
+            child: Text(Strings.errDefault),
           );
         }
         return const Center(
-          child: Text('Unknown state'),
+          child: Text(Strings.errUnknownState),
         );
       },
     );
@@ -114,36 +112,14 @@ class _HomeState extends State<Home> {
     );
   }
 
-  Widget _buildHeader(
+  Widget _buildLoadedScreen(
     BuildContext ctx,
     HomeLoaded state,
   ) {
-    final size = MediaQuery.of(ctx).size;
     if (state.firstRun) {
-      if (_dialogContext != null) {
-        _cubit.logger.d('Dialog exists');
-        try {
-          Navigator.pop(_dialogContext!);
-          // ignore: empty_catches
-        } catch (e) {}
-      }
-      Future.delayed(const Duration(seconds: 2), () {
-        showDialog(
-          context: ctx,
-          builder: (dialogCtx) {
-            _dialogContext = dialogCtx;
-            final horizontalMargin = size.width * 0.30;
-            final verticalMargin = size.height * 0.1;
-            return Container(
-              margin: EdgeInsets.symmetric(
-                horizontal: horizontalMargin,
-                vertical: verticalMargin,
-              ),
-              child: const FirstRunView(),
-            );
-          },
-          barrierDismissible: true,
-        );
+      // wait for 1500ms
+      Future.delayed(const Duration(milliseconds: 1500), () {
+        Navigator.pushNamed(context, Routes.addApp);
       });
     }
     return Center(

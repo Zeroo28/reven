@@ -1,10 +1,12 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:window_manager/window_manager.dart';
 
-import 'presentation/screens/home/cubit/home/home_cubit.dart';
-import 'presentation/screens/home/cubit/rpc/rpc_cubit.dart';
-import 'presentation/screens/home/home.dart';
+import 'presentation/screens/add_app/add_app_screen.dart';
+import 'presentation/screens/home/cubit/home_cubit.dart';
+import 'presentation/screens/home/home_screen.dart';
+import 'presentation/screens/settings/settings_screen.dart';
 import 'presentation/theme.dart';
 import 'utils/constants.dart';
 
@@ -26,7 +28,6 @@ class DiscordRPCApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider<RpcCubit>(create: (context) => RpcCubit()),
         BlocProvider<HomeCubit>(
           create: (context) => HomeCubit(),
         ),
@@ -35,7 +36,29 @@ class DiscordRPCApp extends StatelessWidget {
         return MaterialApp(
           title: Strings.appName,
           theme: RPCTheme.lightTheme,
-          home: const Home(),
+          initialRoute: Routes.home,
+          onGenerateRoute: (settings) {
+            if (settings.name == Routes.home) {
+              return CupertinoPageRoute(
+                builder: (context) => const HomeScreen(),
+              );
+            }
+            if (settings.name == Routes.addApp) {
+              return CupertinoPageRoute(
+                builder: (_) => const AddApplicationScreen(),
+              );
+            }
+            if (settings.name == Routes.settings) {
+              return CupertinoPageRoute(
+                builder: (_) => const SettingsScreen(),
+              );
+            }
+            return MaterialPageRoute(
+              builder: (_) => const Scaffold(
+                body: Center(child: Text('Page not found 404')),
+              ),
+            );
+          },
         );
       }),
     );

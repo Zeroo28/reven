@@ -2,26 +2,26 @@ import 'package:flutter/material.dart';
 import 'package:window_manager/window_manager.dart';
 
 class Strings {
-  static const String about = "About";
-  static const String appName = "Discord RPC Client";
-  static const String exit = "Exit";
-  static const String helloWorld = "Hello World";
-  static const String home = "Home";
-  static const String settings = "Settings";
-  static const String discord = "Discord";
-  static const String discordRpc = "Discord RPC";
-  static const String rpc = "Rich Presence";
-  static const String status = "Status";
-  static const String cancel = "Cancel";
-  static const String continue_ = "Continue";
+  static const String about = 'About';
+  static const String appName = 'Discord RPC Client';
+  static const String exit = 'Exit';
+  static const String helloWorld = 'Hello World';
+  static const String home = 'Home';
+  static const String settings = 'Settings';
+  static const String discord = 'Discord';
+  static const String discordRpc = 'Discord RPC';
+  static const String rpc = 'Rich Presence';
+  static const String status = 'Status';
+  static const String cancel = 'Cancel';
+  static const String continue_ = 'Continue';
 
-  /// Running
-  static const String status1 = "Running";
+  static const String statusOn = 'Running';
+  static const String statusOff = 'Offline';
 
-  /// Offline
-  static const String status2 = "Offline";
-
-  static const String smallWinError = "Window is too small!";
+  // Error messages
+  static const String errDefault =
+      'Please report this error on the GitHub repository by opening an issue.';
+  static const String errUnknownState = 'Unknown state';
 }
 
 class PColors {
@@ -30,9 +30,8 @@ class PColors {
 }
 
 class Integers {
-  static const double maxWindowHeight = 720;
-  static const double maxWindowWidth = 1080;
-  static const double gtkWindowBorderRadius = 12;
+  static const double winMaxHeight = 720;
+  static const double winMaxWidth = 1080;
 }
 
 class Keys {
@@ -42,16 +41,16 @@ class Keys {
 class Configurations {
   static const windowConfig = WindowOptions(
     size: Size(
-      Integers.maxWindowWidth,
-      Integers.maxWindowHeight,
+      Integers.winMaxWidth,
+      Integers.winMaxHeight,
     ),
     maximumSize: Size(
-      Integers.maxWindowWidth,
-      Integers.maxWindowHeight,
+      Integers.winMaxWidth,
+      Integers.winMaxHeight,
     ),
     minimumSize: Size(
-      Integers.maxWindowWidth,
-      Integers.maxWindowHeight,
+      Integers.winMaxWidth,
+      Integers.winMaxHeight,
     ),
     title: Strings.discordRpc,
     titleBarStyle: TitleBarStyle.hidden,
@@ -59,5 +58,11 @@ class Configurations {
     center: true,
   );
 
-  static const defaultRpcApplicationID = "989352288466386964";
+  static const defaultRpcApplicationID = '989352288466386964';
+}
+
+class Routes {
+  static const String home = '/';
+  static const String addApp = '/addApp';
+  static const String settings = '/settings';
 }
