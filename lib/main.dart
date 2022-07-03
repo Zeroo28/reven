@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:window_manager/window_manager.dart';
 
 import 'presentation/screens/add_app/add_app_screen.dart';
 import 'presentation/screens/home/cubit/home_cubit.dart';
@@ -13,12 +12,7 @@ import 'utils/constants.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // DiscordRPC.initialize();
-  windowManager.ensureInitialized();
-
-  windowManager.waitUntilReadyToShow(
-    Configurations.windowConfig,
-    () async => runApp(const DiscordRPCApp()),
-  );
+  runApp(const DiscordRPCApp());
 }
 
 class DiscordRPCApp extends StatelessWidget {

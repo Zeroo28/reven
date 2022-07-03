@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:window_manager/window_manager.dart';
 
 class Strings {
   static const String about = 'About';
@@ -39,25 +38,6 @@ class Keys {
 }
 
 class Configurations {
-  static const windowConfig = WindowOptions(
-    size: Size(
-      Integers.winMaxWidth,
-      Integers.winMaxHeight,
-    ),
-    maximumSize: Size(
-      Integers.winMaxWidth,
-      Integers.winMaxHeight,
-    ),
-    minimumSize: Size(
-      Integers.winMaxWidth,
-      Integers.winMaxHeight,
-    ),
-    title: Strings.discordRpc,
-    titleBarStyle: TitleBarStyle.hidden,
-    fullScreen: false,
-    center: true,
-  );
-
   static const defaultRpcApplicationID = '989352288466386964';
 }
 
