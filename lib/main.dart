@@ -1,3 +1,4 @@
+import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -10,9 +11,16 @@ import 'presentation/theme.dart';
 import 'utils/constants.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
   // DiscordRPC.initialize();
   runApp(const DiscordRPCApp());
+
+  doWhenWindowReady(() {
+    const initialSize = Size(720, 540);
+    appWindow.minSize = initialSize;
+    appWindow.size = initialSize;
+    appWindow.alignment = Alignment.center;
+    appWindow.show();
+  });
 }
 
 class DiscordRPCApp extends StatelessWidget {

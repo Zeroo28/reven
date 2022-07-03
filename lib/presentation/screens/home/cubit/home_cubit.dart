@@ -1,9 +1,9 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
+import 'package:glutton/glutton.dart';
 import 'package:logger/logger.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:glutton/glutton.dart';
 
 import '../../../../../utils/constants.dart';
 
@@ -18,7 +18,6 @@ class HomeCubit extends Cubit<HomeState> {
 
   void initialize() async {
     try {
-      emit(HomeLoading());
       emit(HomeLoaded(!await Glutton.have(Keys.firstRun)));
     } catch (e) {
       logger.e(e);
