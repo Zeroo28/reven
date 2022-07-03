@@ -36,8 +36,6 @@ class Integers {
 }
 
 class Keys {
-  static const String configBox = "config";
-  static const String appDataBox = "applicationBox";
   static const String firstRun = 'firstRun';
 }
 

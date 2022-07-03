@@ -1,28 +1,60 @@
-import 'package:discord_rpc/utlis/constants.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:get_storage/get_storage.dart';
+import 'package:flutter_linkify/flutter_linkify.dart';
 import 'package:logger/logger.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:glutton/glutton.dart';
+
+import '../../../../../utils/constants.dart';
 
 part 'home_state.dart';
 
 class HomeCubit extends Cubit<HomeState> {
   final logger = Logger();
-  final box = GetStorage(StorageKeys.configBox);
-  late bool firstRun;
 
   HomeCubit() : super(HomeLoading()) {
-    firstRun = box.read<bool>(StorageKeys.firstRun) ?? true;
-    logger.d("HomeCubit: firstRun: $firstRun");
-    emit(HomeLoaded(firstRun));
+    initialize();
+  }
+
+  void initialize() async {
+    try {
+      emit(HomeLoading());
+      emit(HomeLoaded(!await Glutton.have(Keys.firstRun)));
+    } catch (e) {
+      logger.e(e);
+      emit(HomeError(e));
+    }
   }
 
   void setCompletedConfig() async {
-    await box.write(StorageKeys.firstRun, false);
+    try {
+      await Glutton.eat(Keys.firstRun, true);
+    } catch (e) {
+      logger.e(e);
+      emit(HomeError(e));
+    }
   }
 
   void clearConfig() async {
-    await box.erase();
-    emit(const HomeLoaded(true));
+    try {
+      emit(HomeLoading());
+      await Glutton.flush();
+      emit(HomeLoaded(!await Glutton.have(Keys.firstRun)));
+    } catch (e) {
+      logger.e(e);
+      emit(HomeError(e));
+    }
+  }
+
+  void openDiscordApplicationUrl(LinkableElement url) async {
+    try {
+      final uri = Uri.parse(url.url);
+      if (await canLaunchUrl(uri)) {
+        await launchUrl(uri);
+      }
+    } catch (e) {
+      logger.e(e);
+      emit(HomeError(e));
+    }
   }
 }
