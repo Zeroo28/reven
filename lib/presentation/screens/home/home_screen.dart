@@ -70,6 +70,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget _buildBody(ThemeData theme, BuildContext context, Size size) {
     return BlocBuilder<HomeCubit, HomeState>(
       builder: (context, state) {
+        _cubit.logger.d('State: $state');
         if (state is HomeLoading) {
           return const Center(
             child: CircularProgressIndicator(),
@@ -117,9 +118,8 @@ class _HomeScreenState extends State<HomeScreen> {
     HomeLoaded state,
   ) {
     if (state.firstRun) {
-      // wait for 1500ms
-      Future.delayed(const Duration(milliseconds: 1500), () {
-        Navigator.pushNamed(context, Routes.addApp);
+      Future.delayed(const Duration(milliseconds: 500), () {
+          Navigator.pushNamed(context, Routes.addApp);
       });
     }
     return Center(
