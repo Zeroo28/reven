@@ -15,11 +15,12 @@ void main() async {
   runApp(const DiscordRPCApp());
 
   doWhenWindowReady(() {
+    final win = appWindow;
     const initialSize = Size(720, 540);
-    appWindow.minSize = initialSize;
-    appWindow.size = initialSize;
-    appWindow.alignment = Alignment.center;
-    appWindow.show();
+    win.minSize = initialSize;
+    win.size = initialSize;
+    win.alignment = Alignment.center;
+    win.show();
   });
 }
 
