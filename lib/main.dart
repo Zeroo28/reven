@@ -32,7 +32,7 @@ class DiscordRPCApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider<HomeCubit>(
-          create: (context) => HomeCubit(),
+          create: (context) => HomeCubit()..initialize(),
         ),
       ],
       child: Builder(builder: (ctx) {
@@ -61,6 +61,7 @@ class DiscordRPCApp extends StatelessWidget {
                 body: Center(child: Text('Page not found 404')),
               ),
             );
+            
           },
         );
       }),

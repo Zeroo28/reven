@@ -12,13 +12,12 @@ part 'home_state.dart';
 class HomeCubit extends Cubit<HomeState> {
   final logger = Logger();
 
-  HomeCubit() : super(HomeLoading()) {
-    initialize();
-  }
+  HomeCubit() : super(HomeLoading());
 
   void initialize() async {
     try {
-      emit(HomeLoaded(!await Glutton.have(Keys.firstRun)));
+      final firstRun = !await Glutton.have(Keys.firstRun);
+      emit(HomeLoaded(firstRun));
     } catch (e) {
       logger.e(e);
       emit(HomeError(e));
