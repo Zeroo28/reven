@@ -1,9 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_linkify/flutter_linkify.dart';
 import 'package:glutton/glutton.dart';
 import 'package:logger/logger.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../../utils/constants.dart';
 
@@ -44,15 +42,15 @@ class HomeCubit extends Cubit<HomeState> {
     }
   }
 
-  void openDiscordApplicationUrl(LinkableElement url) async {
-    try {
-      final uri = Uri.parse(url.url);
-      if (await canLaunchUrl(uri)) {
-        await launchUrl(uri);
-      }
-    } catch (e) {
-      logger.e(e);
-      emit(HomeError(e));
-    }
-  }
+  // void openDiscordApplicationUrl(LinkableElement url) async {
+  //   try {
+  //     final uri = Uri.parse(url.url);
+  //     if (await canLaunchUrl(uri)) {
+  //       await launchUrl(uri);
+  //     }
+  //   } catch (e) {
+  //     logger.e(e);
+  //     emit(HomeError(e));
+  //   }
+  // }
 }
