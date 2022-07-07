@@ -78,6 +78,7 @@ class RPCTheme {
       bodyText1: const TextStyle(
         fontSize: 16,
         fontFamily: 'Inter',
+        fontWeight: FontWeight.bold,
       ),
       bodyText2: const TextStyle(
         fontSize: 14,

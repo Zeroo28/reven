@@ -1,3 +1,4 @@
+import 'package:discord_rpc/presentation/screens/add_app/widgets/form.dart';
 import 'package:flutter/material.dart';
 
 class AddApplicationScreen extends StatelessWidget {
@@ -5,13 +6,10 @@ class AddApplicationScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Future.delayed(
-      const Duration(seconds: 3),
-      () => Navigator.of(context).pop(),
-    );
     return const Scaffold(
-      body: Center(
-        child: Text('Add Application'),
+      body: Padding(
+        padding: EdgeInsets.all(24),
+        child: ApplicationForm(),
       ),
     );
   }

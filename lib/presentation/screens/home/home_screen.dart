@@ -46,23 +46,11 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
       body: _buildBody(theme, context, size),
-      floatingActionButton: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          FloatingActionButton(
-            heroTag: 'clear',
-            onPressed: _cubit.clearConfig,
-            tooltip: 'Clear config',
-            child: const Icon(Icons.clear_all_rounded),
-          ),
-          const SizedBox(width: 8),
-          FloatingActionButton(
-            heroTag: 'refresh',
-            onPressed: _cubit.initialize,
-            tooltip: 'Refresh',
-            child: const Icon(Icons.refresh_rounded),
-          ),
-        ],
+      floatingActionButton: FloatingActionButton(
+        heroTag: 'fbtnAdd',
+        onPressed: () => Navigator.pushNamed(context, Routes.addApp),
+        tooltip: 'Create new application',
+        child: const Icon(Icons.add_rounded),
       ),
     );
   }

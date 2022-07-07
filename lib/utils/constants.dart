@@ -17,10 +17,17 @@ class Strings {
   static const String statusOn = 'Running';
   static const String statusOff = 'Offline';
 
+  static const String fakeApplicationID = '123456789012345678';
+
   // Error messages
   static const String errDefault =
       'Please report this error on the GitHub repository by opening an issue.';
   static const String errUnknownState = 'Unknown state';
+  static const String errFieldEmpty = 'This field cannot be empty.';
+  static const String errInvalidApplicationID = 'Invalid application ID.';
+  static const String errApplicationIdTooLong =
+      'Application ID must only contain 18 characters';
+  static const String errUseOfFakeId = 'That was only an example >.<';
 }
 
 class PColors {
