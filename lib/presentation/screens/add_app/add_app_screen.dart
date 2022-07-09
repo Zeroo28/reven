@@ -6,8 +6,12 @@ class AddApplicationScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Padding(
+    return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: const Text('Add Application'),
+      ),
+      body: const Padding(
         padding: EdgeInsets.all(24),
         child: ApplicationForm(),
       ),

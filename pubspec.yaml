@@ -19,6 +19,7 @@ dependencies:
   url_launcher: ^6.1.4
   glutton: ^2.0.0
   bitsdojo_window: ^0.1.2
+  flutter_switch: ^0.3.2
   
 dev_dependencies:
   flutter_test:

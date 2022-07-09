@@ -1,3 +1,5 @@
+import 'package:discord_rpc/presentation/screens/add_app/widgets/switch.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../utils/constants.dart';
@@ -13,6 +15,7 @@ class ApplicationForm extends StatefulWidget {
 
 class _ApplicationFormState extends State<ApplicationForm> {
   final _formKey = GlobalKey<FormState>();
+  bool enableStartTime = false;
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -22,18 +25,56 @@ class _ApplicationFormState extends State<ApplicationForm> {
       autovalidateMode: AutovalidateMode.always,
       child: Column(
         children: [
-          Text(
-            'Application ID',
-            style: theme.textTheme.bodyText1,
-          ),
-          const SizedBox(height: 12),
           CustomTextField(
             _formKey,
             validator: Validators.validateApplicationId,
             decoration: const InputDecoration(
-              hintText: Strings.fakeApplicationID,
+              labelText: Strings.applicationId,
+              hintText: Strings.egApplicationID,
             ),
             validateOnSubmit: false,
+          ),
+          const SizedBox(height: 12),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Expanded(
+                child: CustomTextField(
+                  _formKey,
+                  decoration: const InputDecoration(
+                    labelText: Strings.details,
+                    hintText: 'Playing Squad',
+                  ),
+                  validateOnSubmit: false,
+                  allowEmptyValue: true,
+                ),
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: CustomTextField(
+                  _formKey,
+                  decoration: const InputDecoration(
+                    labelText: Strings.state,
+                    hintText: 'In Lobby',
+                  ),
+                  validateOnSubmit: false,
+                  allowEmptyValue: true,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 12),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const Text(Strings.enableStartTime),
+              CustomSwitchButton(
+                value: enableStartTime,
+                onToggle: (v) => setState(
+                  () => enableStartTime = v,
+                ),
+              )
+            ],
           )
         ],
       ),

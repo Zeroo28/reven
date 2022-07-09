@@ -47,9 +47,10 @@ class _CustomTextFieldState extends State<CustomTextField> {
 
   @override
   Widget build(BuildContext context) {
+    // TODO: Show error when the inputted ID is smaller than 18 digits.
     return TextFormField(
       validator: _validator,
-      onFieldSubmitted: widget.validateOnSubmit
+      onSaved: widget.validateOnSubmit
           ? (_) => widget.formKey.currentState?.validate()
           : null,
       maxLength: widget.maxLength,

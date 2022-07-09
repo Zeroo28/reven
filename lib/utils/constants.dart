@@ -13,11 +13,22 @@ class Strings {
   static const String status = 'Status';
   static const String cancel = 'Cancel';
   static const String continue_ = 'Continue';
+  static const String applicationId = 'Application Id';
 
   static const String statusOn = 'Running';
   static const String statusOff = 'Offline';
 
-  static const String fakeApplicationID = '123456789012345678';
+  static const String egApplicationID = 'Eg. 123456789012345678';
+
+  static const String details = 'Details';
+  static const String state = 'State';
+  static const String largeImage = 'Large Image';
+  static const String largeImageKey = '$largeImage Key';
+  static const String largeImageText = '$largeImage Text';
+  static const String smallImage = 'Small Image';
+  static const String smallImageKey = '$smallImage Key';
+  static const String smallImageText = '$smallImage Text';
+  static const String enableStartTime = 'Enable Start Time';
 
   // Error messages
   static const String errDefault =
@@ -27,6 +38,8 @@ class Strings {
   static const String errInvalidApplicationID = 'Invalid application ID.';
   static const String errApplicationIdTooLong =
       'Application ID must only contain 18 characters';
+  static const String errApplicationIdTooShort =
+      'Your application ID is a bit too small :(';
   static const String errUseOfFakeId = 'That was only an example >.<';
 }
 

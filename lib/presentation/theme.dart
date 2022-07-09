@@ -32,7 +32,7 @@ class RPCTheme {
       primaryContainer: _primarySwatchColors[100]!,
       secondaryContainer: _primarySwatchColors[100]!,
       error: PColors.error,
-      onPrimary: Colors.white,
+      onPrimary: Colors.black,
       onSecondary: Colors.white,
       onSurface: Colors.black,
       onBackground: Colors.black,

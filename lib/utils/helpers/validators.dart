@@ -12,7 +12,7 @@ class Validators {
     if (value.length > 18) {
       return Strings.errApplicationIdTooLong;
     }
-    if (value == Strings.fakeApplicationID) {
+    if (value == Strings.egApplicationID.split(' ').last) {
       return Strings.errUseOfFakeId;
     }
     return null;

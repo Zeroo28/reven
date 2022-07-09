@@ -8,6 +8,7 @@ import 'presentation/screens/home/cubit/home_cubit.dart';
 import 'presentation/screens/home/home_screen.dart';
 import 'presentation/screens/settings/settings_screen.dart';
 import 'presentation/theme.dart';
+import 'presentation/widgets/screen.dart';
 import 'utils/constants.dart';
 
 void main() async {
@@ -35,36 +36,35 @@ class DiscordRPCApp extends StatelessWidget {
           create: (context) => HomeCubit()..initialize(),
         ),
       ],
-      child: Builder(builder: (ctx) {
-        return MaterialApp(
-          title: Strings.appName,
-          theme: RPCTheme.lightTheme,
-          initialRoute: Routes.home,
-          onGenerateRoute: (settings) {
-            if (settings.name == Routes.home) {
-              return CupertinoPageRoute(
-                builder: (context) => const HomeScreen(),
-              );
-            }
-            if (settings.name == Routes.addApp) {
-              return CupertinoPageRoute(
-                builder: (_) => const AddApplicationScreen(),
-              );
-            }
-            if (settings.name == Routes.settings) {
-              return CupertinoPageRoute(
-                builder: (_) => const SettingsScreen(),
-              );
-            }
-            return MaterialPageRoute(
-              builder: (_) => const Scaffold(
-                body: Center(child: Text('Page not found 404')),
-              ),
+      child: MaterialApp(
+        title: Strings.appName,
+        theme: RPCTheme.lightTheme,
+        initialRoute: Routes.home,
+        onGenerateRoute: (settings) {
+          if (settings.name == Routes.home) {
+            return CupertinoPageRoute(
+              builder: (context) => const Screen(HomeScreen()),
             );
-            
-          },
-        );
-      }),
+          }
+          if (settings.name == Routes.addApp) {
+            return CupertinoPageRoute(
+              builder: (_) => const Screen(AddApplicationScreen()),
+            );
+          }
+          if (settings.name == Routes.settings) {
+            return CupertinoPageRoute(
+              builder: (_) => const Screen(SettingsScreen()),
+            );
+          }
+          return MaterialPageRoute(
+            builder: (_) => const Screen(Scaffold(
+              body: Center(
+                child: Text('Page not found 404'),
+              ),
+            )),
+          );
+        },
+      ),
     );
   }
 }
