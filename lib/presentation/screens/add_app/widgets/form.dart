@@ -1,5 +1,4 @@
 import 'package:discord_rpc/presentation/screens/add_app/widgets/switch.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../utils/constants.dart';

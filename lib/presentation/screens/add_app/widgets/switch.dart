@@ -1,6 +1,5 @@
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter_switch/flutter_switch.dart';
+import 'package:flutter/material.dart';
 
 typedef SwitchFunction = void Function(bool);
 
