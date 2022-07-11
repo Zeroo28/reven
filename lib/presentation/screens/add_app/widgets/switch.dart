@@ -20,10 +20,12 @@ class CustomSwitchButton extends StatefulWidget {
 class _CustomSwitchButtonState extends State<CustomSwitchButton> {
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return FlutterSwitch(
       value: widget.value,
       onToggle: widget.onToggle,
-      
+      activeColor: theme.colorScheme.secondary,
+      toggleColor: theme.colorScheme.onSecondary,
     );
   }
 }

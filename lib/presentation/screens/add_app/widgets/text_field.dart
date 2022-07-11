@@ -12,6 +12,7 @@ class CustomTextField extends StatefulWidget {
   final bool allowEmptyValue;
   final bool validateOnSubmit;
   final int? maxLength;
+  final String? tooltip;
   final TextInputType keyboardType;
 
   const CustomTextField(
@@ -23,6 +24,7 @@ class CustomTextField extends StatefulWidget {
     this.maxLength,
     this.keyboardType = TextInputType.text,
     this.decoration,
+    this.tooltip,
   }) : super(key: key);
 
   @override
@@ -48,14 +50,28 @@ class _CustomTextFieldState extends State<CustomTextField> {
   @override
   Widget build(BuildContext context) {
     // TODO: Show error when the inputted ID is smaller than 18 digits.
-    return TextFormField(
-      validator: _validator,
-      onSaved: widget.validateOnSubmit
-          ? (_) => widget.formKey.currentState?.validate()
-          : null,
-      maxLength: widget.maxLength,
-      keyboardType: widget.keyboardType,
-      decoration: widget.decoration,
-    );
+    return widget.tooltip == null
+        ? TextFormField(
+            validator: _validator,
+            onSaved: widget.validateOnSubmit
+                ? (_) => widget.formKey.currentState?.validate()
+                : null,
+            maxLength: widget.maxLength,
+            keyboardType: widget.keyboardType,
+            decoration: widget.decoration,
+          )
+        : Tooltip(
+            message: widget.tooltip,
+            triggerMode: TooltipTriggerMode.tap,
+            child: TextFormField(
+              validator: _validator,
+              onSaved: widget.validateOnSubmit
+                  ? (_) => widget.formKey.currentState?.validate()
+                  : null,
+              maxLength: widget.maxLength,
+              keyboardType: widget.keyboardType,
+              decoration: widget.decoration,
+            ),
+          );
   }
 }

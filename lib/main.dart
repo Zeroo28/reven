@@ -40,6 +40,7 @@ class DiscordRPCApp extends StatelessWidget {
       child: MaterialApp(
         title: Strings.appName,
         theme: RPCTheme.lightTheme,
+        debugShowCheckedModeBanner: false,
         initialRoute: Routes.home,
         onGenerateRoute: (settings) {
           if (settings.name == Routes.home) {

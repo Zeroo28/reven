@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../utils/constants/constants.dart';
 import '../../../utils/constants/strings.dart';
 import '../../../utils/constants/page_routes.dart';
 import 'cubit/home_cubit.dart';
@@ -40,15 +41,12 @@ class _HomeScreenState extends State<HomeScreen> {
             Navigator.pushNamed(context, Routes.settings);
           },
           iconSize: 32,
-          icon: Icon(
-            Icons.settings,
-            color: theme.buttonTheme.colorScheme?.secondary,
-          ),
+          icon: const Icon(Icons.settings),
         ),
       ),
       body: _buildBody(theme, context, size),
       floatingActionButton: FloatingActionButton(
-        heroTag: 'fbtnAdd',
+        heroTag: Keys.heroSettingsTag,
         onPressed: () => Navigator.pushNamed(context, Routes.addApp),
         tooltip: 'Create new application',
         child: const Icon(Icons.add_rounded),

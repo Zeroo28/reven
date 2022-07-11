@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../utils/constants/constants.dart';
 import '../../../../utils/constants/strings.dart';
 import '../../../../utils/helpers/validators.dart';
 import 'text_field.dart';
@@ -22,44 +23,27 @@ class _ApplicationFormState extends State<ApplicationForm> {
   @override
   Widget build(BuildContext context) {
     _theme = Theme.of(context);
-    // final size = MediaQuery.of(context);
     return Form(
       key: _formKey,
       autovalidateMode: AutovalidateMode.always,
       child: ListView(
         children: [
-          ...buildHead(),
-          const SizedBox(height: 12),
-          ...buildBody(),
-          const SizedBox(height: 12),
-          Text(
-            Strings.others,
-            style: _theme.textTheme.bodyText1,
-          ),
-          const SizedBox(height: 12),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const Text(Strings.enableStartTime),
-              CustomSwitchButton(
-                value: enableStartTime,
-                onToggle: (v) => setState(
-                  () => enableStartTime = v,
-                ),
-              )
-            ],
-          )
+          ...buildDetails(),
+          const SizedBox(height: 20),
+          ...buildImageDetails(),
+          const SizedBox(height: 20),
+          ...buildOtherDetails(),
         ],
       ),
     );
   }
 
   // Contains all text details about the RPC
-  List<Widget> buildHead() {
+  List<Widget> buildDetails() {
     return [
       Text(
         Strings.details,
-        style: _theme.textTheme.bodyText1,
+        style: _theme.textTheme.headline6,
       ),
       CustomTextField(
         _formKey,
@@ -69,8 +53,9 @@ class _ApplicationFormState extends State<ApplicationForm> {
           hintText: Strings.egApplicationID,
         ),
         validateOnSubmit: false,
+        tooltip: "Your application's ID",
       ),
-      const SizedBox(height: 12),
+      const SizedBox(height: 8),
       Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
@@ -83,9 +68,10 @@ class _ApplicationFormState extends State<ApplicationForm> {
               ),
               validateOnSubmit: false,
               allowEmptyValue: true,
+              tooltip: 'What are you doing?',
             ),
           ),
-          const SizedBox(width: 12),
+          const SizedBox(width: 8),
           Expanded(
             child: CustomTextField(
               _formKey,
@@ -103,13 +89,12 @@ class _ApplicationFormState extends State<ApplicationForm> {
   }
 
   // Contains all image related details about the RPC
-  List<Widget> buildBody() {
+  List<Widget> buildImageDetails() {
     return [
       Text(
         Strings.images,
-        style: _theme.textTheme.bodyText1,
+        style: _theme.textTheme.headline6,
       ),
-      const SizedBox(height: 8),
       Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
@@ -122,7 +107,7 @@ class _ApplicationFormState extends State<ApplicationForm> {
               validateOnSubmit: false,
             ),
           ),
-          const SizedBox(width: 12),
+          const SizedBox(width: 8),
           Expanded(
             child: CustomTextField(
               _formKey,
@@ -134,7 +119,7 @@ class _ApplicationFormState extends State<ApplicationForm> {
           ),
         ],
       ),
-      const SizedBox(height: 12),
+      const SizedBox(height: 8),
       Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
@@ -147,7 +132,7 @@ class _ApplicationFormState extends State<ApplicationForm> {
               validateOnSubmit: false,
             ),
           ),
-          const SizedBox(width: 12),
+          const SizedBox(width: 8),
           Expanded(
             child: CustomTextField(
               _formKey,
@@ -157,6 +142,28 @@ class _ApplicationFormState extends State<ApplicationForm> {
               validateOnSubmit: false,
             ),
           ),
+        ],
+      ),
+    ];
+  }
+
+  // Other details related to the RPC
+  List<Widget> buildOtherDetails() {
+    return [
+      Text(
+        Strings.others,
+        style: _theme.textTheme.headline6,
+      ),
+      Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          const Text(Strings.enableStartTime),
+          CustomSwitchButton(
+            value: enableStartTime,
+            onToggle: (v) => setState(
+              () => enableStartTime = v,
+            ),
+          )
         ],
       ),
     ];
