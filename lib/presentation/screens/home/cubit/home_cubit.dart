@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:glutton/glutton.dart';
 import 'package:logger/logger.dart';
 
-import '../../../../../utils/constants.dart';
+import '../../../../utils/constants/constants.dart';
 
 part 'home_state.dart';
 

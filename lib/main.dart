@@ -9,7 +9,8 @@ import 'presentation/screens/home/home_screen.dart';
 import 'presentation/screens/settings/settings_screen.dart';
 import 'presentation/theme.dart';
 import 'presentation/widgets/screen.dart';
-import 'utils/constants.dart';
+import 'utils/constants/page_routes.dart';
+import 'utils/constants/strings.dart';
 
 void main() async {
   // DiscordRPC.initialize();

@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 class Strings {
   static const String about = 'About';
   static const String appName = 'Discord RPC Client';
@@ -14,6 +12,8 @@ class Strings {
   static const String cancel = 'Cancel';
   static const String continue_ = 'Continue';
   static const String applicationId = 'Application Id';
+  static const String images = 'Images';
+  static const String others = 'Others';
 
   static const String statusOn = 'Running';
   static const String statusOff = 'Offline';
@@ -41,28 +41,4 @@ class Strings {
   static const String errApplicationIdTooShort =
       'Your application ID is a bit too small :(';
   static const String errUseOfFakeId = 'That was only an example >.<';
-}
-
-class PColors {
-  static Color success = const Color(0xFF27AE60);
-  static Color error = const Color(0xFFeb5757);
-}
-
-class Integers {
-  static const double winMaxHeight = 720;
-  static const double winMaxWidth = 1080;
-}
-
-class Keys {
-  static const String firstRun = 'firstRun';
-}
-
-class Configurations {
-  static const defaultRpcApplicationID = '989352288466386964';
-}
-
-class Routes {
-  static const String home = '/';
-  static const String addApp = '/addApp';
-  static const String settings = '/settings';
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../utils/constants.dart';
+import 'colors.dart';
 
 class RPCTheme {
   static const Map<int, Color> _primarySwatchColors = {

@@ -1,4 +1,4 @@
-import '../constants.dart';
+import '../constants/strings.dart';
 
 class Validators {
   static String? validateApplicationId(String? value) {

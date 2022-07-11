@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../utils/constants.dart';
+import '../../../../utils/constants/strings.dart';
 
 typedef StringValidator = String? Function(String?)?;
 typedef VoidFunction = void Function();
