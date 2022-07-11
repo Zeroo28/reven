@@ -1,13 +1,13 @@
-part of 'home_cubit.dart';
+part of 'config_cubit.dart';
 
-abstract class HomeState extends Equatable {
-  const HomeState();
+abstract class ConfigState extends Equatable {
+  const ConfigState();
 
   @override
   List<Object> get props => [];
 }
 
-class HomeLoading extends HomeState {
+class LoadingConfig extends ConfigState {
   @override
   List<Object> get props => [];
 
@@ -15,10 +15,10 @@ class HomeLoading extends HomeState {
   String toString() => 'HomeLoading { }';
 }
 
-class HomeLoaded extends HomeState {
+class ConfigLoaded extends ConfigState {
   final bool firstRun;
 
-  const HomeLoaded(this.firstRun);
+  const ConfigLoaded(this.firstRun);
 
   @override
   List<Object> get props => [firstRun];
@@ -27,10 +27,10 @@ class HomeLoaded extends HomeState {
   String toString() => 'HomeLoaded { firstRun: $firstRun }';
 }
 
-class HomeError extends HomeState {
+class ConfigError extends ConfigState {
   final dynamic message;
 
-  const HomeError(this.message);
+  const ConfigError(this.message);
 
   @override
   List<Object> get props => [message];

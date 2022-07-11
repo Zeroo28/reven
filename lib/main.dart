@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'application/home_cubit/home_cubit.dart';
+import 'application/config_cubit/config_cubit.dart';
 import 'presentation/screens/add_app/add_app_screen.dart';
 import 'presentation/screens/home/home_screen.dart';
 import 'presentation/screens/settings/settings_screen.dart';
@@ -33,8 +33,8 @@ class DiscordRPCApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider<HomeCubit>(
-          create: (context) => HomeCubit()..initialize(),
+        BlocProvider<ConfigCubit>(
+          create: (context) => ConfigCubit()..initialize(),
         ),
       ],
       child: MaterialApp(

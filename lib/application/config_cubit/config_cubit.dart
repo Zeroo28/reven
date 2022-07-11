@@ -5,20 +5,20 @@ import 'package:logger/logger.dart';
 
 import '../../utils/constants/configs.dart';
 
-part 'home_state.dart';
+part 'config_state.dart';
 
-class HomeCubit extends Cubit<HomeState> {
+class ConfigCubit extends Cubit<ConfigState> {
   final logger = Logger();
 
-  HomeCubit() : super(HomeLoading());
+  ConfigCubit() : super(LoadingConfig());
 
   void initialize() async {
     try {
       final firstRun = !await Glutton.have(Keys.firstRun);
-      emit(HomeLoaded(firstRun));
+      emit(ConfigLoaded(firstRun));
     } catch (e) {
       logger.e(e);
-      emit(HomeError(e));
+      emit(ConfigError(e));
     }
   }
 
@@ -27,30 +27,18 @@ class HomeCubit extends Cubit<HomeState> {
       await Glutton.eat(Keys.firstRun, true);
     } catch (e) {
       logger.e(e);
-      emit(HomeError(e));
+      emit(ConfigError(e));
     }
   }
 
   void clearConfig() async {
     try {
-      emit(HomeLoading());
+      emit(LoadingConfig());
       await Glutton.flush();
-      emit(HomeLoaded(!await Glutton.have(Keys.firstRun)));
+      emit(ConfigLoaded(!await Glutton.have(Keys.firstRun)));
     } catch (e) {
       logger.e(e);
-      emit(HomeError(e));
+      emit(ConfigError(e));
     }
   }
-
-  // void openDiscordApplicationUrl(LinkableElement url) async {
-  //   try {
-  //     final uri = Uri.parse(url.url);
-  //     if (await canLaunchUrl(uri)) {
-  //       await launchUrl(uri);
-  //     }
-  //   } catch (e) {
-  //     logger.e(e);
-  //     emit(HomeError(e));
-  //   }
-  // }
 }
