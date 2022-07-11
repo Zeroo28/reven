@@ -3,11 +3,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'application/home_cubit/home_cubit.dart';
 import 'presentation/screens/add_app/add_app_screen.dart';
-import 'presentation/screens/home/cubit/home_cubit.dart';
 import 'presentation/screens/home/home_screen.dart';
 import 'presentation/screens/settings/settings_screen.dart';
-import 'presentation/theme.dart';
+import 'presentation/theme/theme.dart';
 import 'presentation/widgets/screen.dart';
 import 'utils/constants/page_routes.dart';
 import 'utils/constants/strings.dart';

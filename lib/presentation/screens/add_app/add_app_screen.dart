@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../utils/constants/constants.dart';
-import 'widgets/form.dart';
+import '../../../utils/constants/configs.dart';
+import '../../widgets/form.dart';
 
 class AddApplicationScreen extends StatelessWidget {
   const AddApplicationScreen({Key? key}) : super(key: key);
