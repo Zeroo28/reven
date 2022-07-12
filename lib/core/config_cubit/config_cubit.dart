@@ -1,32 +1,33 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:glutton/glutton.dart';
-import 'package:logger/logger.dart';
 
 import '../../utils/constants/configs.dart';
+import '../../utils/helpers/glutton_helper.dart';
+import '../../utils/helpers/logger_helper.dart';
 
 part 'config_state.dart';
 
 class ConfigCubit extends Cubit<ConfigState> {
   final logger = Logger();
+  final _glutton = GluttonHelper();
 
   ConfigCubit() : super(LoadingConfig());
 
   void initialize() async {
     try {
-      final firstRun = !await Glutton.have(Keys.firstRun);
+      final firstRun = !await _glutton.contains(Keys.firstRun);
       emit(ConfigLoaded(firstRun));
     } catch (e) {
-      logger.e(e);
+      logger.error(e);
       emit(ConfigError(e));
     }
   }
 
   void setCompletedConfig() async {
     try {
-      await Glutton.eat(Keys.firstRun, true);
+      await _glutton.save(Keys.firstRun, true);
     } catch (e) {
-      logger.e(e);
+      logger.error(e);
       emit(ConfigError(e));
     }
   }
@@ -34,10 +35,10 @@ class ConfigCubit extends Cubit<ConfigState> {
   void clearConfig() async {
     try {
       emit(LoadingConfig());
-      await Glutton.flush();
-      emit(ConfigLoaded(!await Glutton.have(Keys.firstRun)));
+      await _glutton.clear();
+      emit(ConfigLoaded(!await _glutton.contains(Keys.firstRun)));
     } catch (e) {
-      logger.e(e);
+      logger.error(e);
       emit(ConfigError(e));
     }
   }

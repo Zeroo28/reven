@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../application/config_cubit/config_cubit.dart';
+import '../../../core/config_cubit/config_cubit.dart';
 import '../../../utils/constants/configs.dart';
 import '../../../utils/constants/strings.dart';
 import '../../../utils/constants/page_routes.dart';

@@ -5,6 +5,7 @@
 list(APPEND FLUTTER_PLUGIN_LIST
   bitsdojo_window_linux
   dart_discord_rpc
+  sqlite3_flutter_libs
   url_launcher_linux
 )
 

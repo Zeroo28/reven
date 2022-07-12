@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'application/config_cubit/config_cubit.dart';
+import 'core/config_cubit/config_cubit.dart';
 import 'presentation/screens/add_app/add_app_screen.dart';
 import 'presentation/screens/home/home_screen.dart';
 import 'presentation/screens/settings/settings_screen.dart';
