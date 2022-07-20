@@ -8,8 +8,8 @@ class Application extends Table {
   TextColumn get body => text().nullable()();
   // active: indicates if the application is active or not, default false
   BoolColumn get active => boolean().withDefault(const Constant(false))();
-  // createdAt: date when the application was created, defaults to current date
-  DateTimeColumn get createdAt => dateTime().withDefault(Constant(DateTime.now()))();
+  // createdAt: date when the application was created, not nullable
+  DateTimeColumn get createdAt => dateTime()();
   // lastUsed: date when the application was last used, nullable
   DateTimeColumn get lastUsed => dateTime().nullable()();
 }

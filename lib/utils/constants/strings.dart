@@ -41,4 +41,9 @@ class Strings {
   static const String errApplicationIdTooShort =
       'Your application ID is a bit too small :(';
   static const String errUseOfFakeId = 'That was only an example >.<';
+
+  static String getUsername(String path) {
+    final userName = path.split('/')[2];
+    return '/home/$userName/.local/share/com.example.discord_rpc';
+  }
 }

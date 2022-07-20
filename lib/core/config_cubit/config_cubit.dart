@@ -1,3 +1,4 @@
+import 'package:discord_rpc/database/app_database.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -12,6 +13,8 @@ class ConfigCubit extends Cubit<ConfigState> {
 
   void initialize() async {
     try {
+      final apps = await AppDatabase().getApplications;
+      logger.debug('apps: $apps');
       // final firstRun = !await _glutton.contains(Keys.firstRun);
       emit(const ConfigLoaded(true));
     } catch (e) {
