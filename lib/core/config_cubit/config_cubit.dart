@@ -1,7 +1,7 @@
-import 'package:discord_rpc/database/app_database.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../database/app_database.dart';
 import '../../utils/helpers/logger_helper.dart';
 
 part 'config_state.dart';
