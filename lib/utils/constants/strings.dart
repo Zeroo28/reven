@@ -1,12 +1,12 @@
 class Strings {
   static const String about = 'About';
-  static const String appName = 'Discord RPC Client';
+  static const String appName = 'Reven';
   static const String exit = 'Exit';
   static const String helloWorld = 'Hello World';
   static const String home = 'Home';
   static const String settings = 'Settings';
   static const String discord = 'Discord';
-  static const String discordRpc = 'Discord RPC';
+  static const String discordRpc = '$discord RPC';
   static const String rpc = 'Rich Presence';
   static const String status = 'Status';
   static const String cancel = 'Cancel';
