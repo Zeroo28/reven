@@ -81,14 +81,14 @@ class _HomeScreenState extends State<HomeScreen> {
     return RichText(
       overflow: TextOverflow.fade,
       text: TextSpan(
-        text: Strings.discord,
+        text: Strings.appName.split("").take(2).join(),
         style: theme.appBarTheme.titleTextStyle?.copyWith(
           color: theme.colorScheme.onBackground,
           fontWeight: FontWeight.w600,
         ),
         children: [
           TextSpan(
-            text: " ${Strings.rpc}",
+            text: Strings.appName.split('Re').last,
             style: theme.appBarTheme.titleTextStyle?.copyWith(
               color: theme.colorScheme.onBackground,
               fontWeight: FontWeight.normal,
