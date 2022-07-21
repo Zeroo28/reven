@@ -1,4 +1,4 @@
-# Discord RPC client
+# Reven
 
 Another Discord RPC client, cuz why not?
 
