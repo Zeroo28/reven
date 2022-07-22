@@ -31,9 +31,7 @@ class ApplicationsCubit extends Cubit<ApplicationsState> {
 
   void initialize() async {
     try {
-      final applications = await dao.getApplications;
-      logger.debug('Applications: ${applications[100]}');
-      emit(ApplicationsLoaded(applications));
+      emit(ApplicationsLoaded(await dao.getApplications));
     } catch (e, st) {
       logger.error(st);
       emit(ApplicationsError(e.toString(), st));
