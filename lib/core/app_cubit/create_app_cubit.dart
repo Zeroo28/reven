@@ -32,16 +32,15 @@ class ApplicationsCubit extends Cubit<ApplicationsState> {
   void initialize() async {
     try {
       final applications = await dao.getApplications;
-      logger.debug('Applications: $applications');
+      logger.debug('Applications: ${applications[100]}');
       emit(ApplicationsLoaded(applications));
-    } catch (e) {
-      logger.error(e);
-      emit(ApplicationsError(e));
+    } catch (e, st) {
+      logger.error(st);
+      emit(ApplicationsError(e.toString(), st));
     }
   }
 
   void saveApplication(Presence application) {
-    logger.debug('saveApplication called in create_app_cubit.dart');
     dao.saveApplication(application);
   }
 

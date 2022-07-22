@@ -19,10 +19,11 @@ class ApplicationsLoaded extends ApplicationsState {
 }
 
 class ApplicationsError extends ApplicationsState {
-  final dynamic message;
+  final String error;
+  final StackTrace st;
 
-  const ApplicationsError(this.message);
+  const ApplicationsError(this.error, this.st);
 
   @override
-  List<Object> get props => [message];
+  List<Object> get props => [error, st];
 }

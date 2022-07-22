@@ -6,6 +6,7 @@ import '../../../core/app_cubit/create_app_cubit.dart';
 import '../../../utils/constants/configs.dart';
 import '../../../utils/constants/strings.dart';
 import '../../../utils/constants/page_routes.dart';
+import '../../widgets/error.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -66,8 +67,8 @@ class _HomeScreenState extends State<HomeScreen> {
           return _buildLoadedScreen(context, newState);
         }
         if (newState is ApplicationsError) {
-          return const Center(
-            child: Text(Strings.errDefault),
+          return Center(
+            child: CustomErrorWidget(newState.error, st: newState.st),
           );
         }
         return const Center(
