@@ -17,7 +17,6 @@ class ApplicationsDao extends DatabaseAccessor<AppDatabase>
   Future saveApplication(Presence app) {
     logger.debug('saveApplication called in application_dao.dart');
     final col = ApplicationCompanion(
-      id: Value(app.id),
       body: Value(app.toJsonString()),
       createdAt: Value(DateTime.now()),
     );

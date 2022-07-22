@@ -36,7 +36,7 @@ class DiscordRPCApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (_) => ApplicationsCubit(db))
+        BlocProvider(create: (_) => ApplicationsCubit(db)..initialize())
       ],
       child: MaterialApp(
         title: Strings.appName,

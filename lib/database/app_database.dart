@@ -8,7 +8,6 @@ import 'package:path_provider/path_provider.dart';
 import '../models/tables/applications.dart';
 import '../utils/constants/strings.dart';
 import '../utils/constants/regex.dart';
-import 'dao/application_dao.dart';
 
 part 'app_database.g.dart';
 

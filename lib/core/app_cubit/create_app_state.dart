@@ -19,7 +19,7 @@ class ApplicationsLoaded extends ApplicationsState {
 }
 
 class ApplicationsError extends ApplicationsState {
-  final String message;
+  final dynamic message;
 
   const ApplicationsError(this.message);
 
