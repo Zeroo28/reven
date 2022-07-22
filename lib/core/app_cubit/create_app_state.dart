@@ -1,30 +1,28 @@
 part of 'create_app_cubit.dart';
 
-abstract class CreateAppState extends Equatable {
-  const CreateAppState();
+abstract class ApplicationsState extends Equatable {
+  const ApplicationsState();
 
   @override
   List<Object> get props => [];
 }
 
-class LoadingApplication extends CreateAppState {}
+class ApplicationsLoading extends ApplicationsState {}
 
-class SavingApplication extends CreateAppState {}
+class ApplicationsLoaded extends ApplicationsState {
+  final List<Applications> applications;
 
-class SavedApplication extends CreateAppState {
-  final int applicationId;
-
-  const SavedApplication(this.applicationId);
+  const ApplicationsLoaded(this.applications);
 
   @override
-  List<Object> get props => [applicationId];
+  List<Object> get props => [applications];
 }
 
-class LoadedApplication extends CreateAppState {
-  final Presence application;
+class ApplicationsError extends ApplicationsState {
+  final String message;
 
-  const LoadedApplication(this.application);
+  const ApplicationsError(this.message);
 
   @override
-  List<Object> get props => [application.id ?? 0];
+  List<Object> get props => [message];
 }

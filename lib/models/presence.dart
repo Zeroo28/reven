@@ -1,5 +1,7 @@
+import 'dart:convert';
+
 class Presence {
-  final int? id;
+  final int id;
   final String? state;
   final String? details;
   final int? startTimeStamp; // used to show elapsed time.
@@ -18,7 +20,7 @@ class Presence {
   final String? spectateSecret;
 
   Presence({
-    this.id,
+    required this.id,
     this.state,
     this.details,
     this.startTimeStamp,
@@ -53,6 +55,10 @@ class Presence {
       _PresenceKeys.joinSecret: joinSecret,
       _PresenceKeys.spectateSecret: spectateSecret,
     };
+  }
+
+  String toJsonString() {
+    return const JsonEncoder().convert(toJson());
   }
 
   factory Presence.fromJson(Map<String, dynamic> json) {

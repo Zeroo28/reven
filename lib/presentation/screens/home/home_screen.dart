@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../core/config_cubit/config_cubit.dart';
+import '../../../core/app_cubit/create_app_cubit.dart';
 import '../../../utils/constants/configs.dart';
 import '../../../utils/constants/strings.dart';
 import '../../../utils/constants/page_routes.dart';
@@ -16,7 +16,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   late bool isDebug;
-  late ConfigCubit _cubit;
+  late ApplicationsCubit _cubit;
 
   @override
   void initState() {
@@ -26,7 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    _cubit = BlocProvider.of<ConfigCubit>(context);
+    _cubit = BlocProvider.of<ApplicationsCubit>(context);
     final theme = Theme.of(context);
     final size = MediaQuery.of(context).size;
     return Scaffold(
@@ -55,17 +55,17 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _buildBody(ThemeData theme, BuildContext context, Size size) {
-    return BlocBuilder<ConfigCubit, ConfigState>(
+    return BlocBuilder<ApplicationsCubit, ApplicationsState>(
       builder: (context, newState) {
-        if (newState is LoadingConfig) {
+        if (newState is ApplicationsLoading) {
           return const Center(
             child: CircularProgressIndicator(),
           );
         }
-        if (newState is ConfigLoaded) {
+        if (newState is ApplicationsLoaded) {
           return _buildLoadedScreen(context, newState);
         }
-        if (newState is ConfigError) {
+        if (newState is ApplicationsError) {
           return const Center(
             child: Text(Strings.errDefault),
           );
@@ -101,10 +101,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget _buildLoadedScreen(
     BuildContext ctx,
-    ConfigLoaded state,
+    ApplicationsLoaded state,
   ) {
     return Center(
-      child: Text('First run: ${state.firstRun}'),
+      child: Text('First run: ${state.applications.isEmpty}'),
     );
   }
 }

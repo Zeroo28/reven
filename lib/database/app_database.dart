@@ -8,6 +8,7 @@ import 'package:path_provider/path_provider.dart';
 import '../models/tables/applications.dart';
 import '../utils/constants/strings.dart';
 import '../utils/constants/regex.dart';
+import 'dao/application_dao.dart';
 
 part 'app_database.g.dart';
 
@@ -16,17 +17,7 @@ class AppDatabase extends _$AppDatabase {
   AppDatabase() : super(_init());
 
   @override
-  int get schemaVersion => 1;
-
-  // Adding all the code here because we won't be needing multiple DAOs
-
-  Future<List<Applications>> get getApplications => select(application).get();
-
-  Future<Applications> getApplicationsById(int id) =>
-      (select(application)..where((app) => app.id.equals(id))).getSingle();
-
-  Future<int> saveApplication(Applications app) =>
-      into(application).insert(app);
+  int get schemaVersion => 1;  
 }
 
 LazyDatabase _init() {
@@ -41,7 +32,6 @@ LazyDatabase _init() {
     } else {
       file = File(join(dbFolder.path, 'app_database.db'));
     }
-
     // Remove logStatements after completing debugging
     return NativeDatabase(file, logStatements: true);
   });

@@ -139,9 +139,9 @@ class ApplicationCompanion extends UpdateCompanion<Applications> {
     this.id = const Value.absent(),
     this.body = const Value.absent(),
     this.active = const Value.absent(),
-    this.createdAt = const Value.absent(),
+    required DateTime createdAt,
     this.lastUsed = const Value.absent(),
-  });
+  }) : createdAt = Value(createdAt);
   static Insertable<Applications> custom({
     Expression<int>? id,
     Expression<String?>? body,
@@ -237,9 +237,7 @@ class $ApplicationTable extends Application
   @override
   late final GeneratedColumn<DateTime?> createdAt = GeneratedColumn<DateTime?>(
       'created_at', aliasedName, false,
-      type: const IntType(),
-      requiredDuringInsert: false,
-      defaultValue: Constant(DateTime.now()));
+      type: const IntType(), requiredDuringInsert: true);
   final VerificationMeta _lastUsedMeta = const VerificationMeta('lastUsed');
   @override
   late final GeneratedColumn<DateTime?> lastUsed = GeneratedColumn<DateTime?>(
@@ -270,6 +268,8 @@ class $ApplicationTable extends Application
     if (data.containsKey('created_at')) {
       context.handle(_createdAtMeta,
           createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta));
+    } else if (isInserting) {
+      context.missing(_createdAtMeta);
     }
     if (data.containsKey('last_used')) {
       context.handle(_lastUsedMeta,
@@ -294,6 +294,7 @@ class $ApplicationTable extends Application
 
 abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(SqlTypeSystem.defaultInstance, e);
+  _$AppDatabase.connect(DatabaseConnection c) : super.connect(c);
   late final $ApplicationTable application = $ApplicationTable(this);
   @override
   Iterable<TableInfo> get allTables => allSchemaEntities.whereType<TableInfo>();

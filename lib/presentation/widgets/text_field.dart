@@ -14,6 +14,7 @@ class CustomTextField extends StatefulWidget {
   final int? maxLength;
   final String? tooltip;
   final TextInputType keyboardType;
+  final TextEditingController controller;
 
   const CustomTextField(
     this.formKey, {
@@ -25,6 +26,7 @@ class CustomTextField extends StatefulWidget {
     this.keyboardType = TextInputType.text,
     this.decoration,
     this.tooltip,
+    required this.controller,
   }) : super(key: key);
 
   @override
@@ -59,6 +61,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
             maxLength: widget.maxLength,
             keyboardType: widget.keyboardType,
             decoration: widget.decoration,
+            controller: widget.controller,
           )
         : Tooltip(
             message: widget.tooltip,
@@ -71,6 +74,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
               maxLength: widget.maxLength,
               keyboardType: widget.keyboardType,
               decoration: widget.decoration,
+              controller: widget.controller,
             ),
           );
   }

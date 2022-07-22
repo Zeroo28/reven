@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../core/app_cubit/create_app_cubit.dart';
 import '../../../../utils/constants/strings.dart';
 import '../../../../utils/helpers/validators.dart';
 import 'text_field.dart';
@@ -14,16 +16,14 @@ class ApplicationForm extends StatefulWidget {
 
 class _ApplicationFormState extends State<ApplicationForm> {
   late ThemeData _theme;
-
-  final _formKey = GlobalKey<FormState>();
-
-  bool enableStartTime = false;
+  late ApplicationsCubit _cubit;
 
   @override
   Widget build(BuildContext context) {
+    _cubit = BlocProvider.of<ApplicationsCubit>(context);
     _theme = Theme.of(context);
     return Form(
-      key: _formKey,
+      key: _cubit.formKey,
       autovalidateMode: AutovalidateMode.always,
       child: ListView(
         children: [
@@ -45,7 +45,7 @@ class _ApplicationFormState extends State<ApplicationForm> {
         style: _theme.textTheme.headline6,
       ),
       CustomTextField(
-        _formKey,
+        _cubit.formKey,
         validator: Validators.validateApplicationId,
         decoration: const InputDecoration(
           labelText: Strings.applicationId,
@@ -53,6 +53,7 @@ class _ApplicationFormState extends State<ApplicationForm> {
         ),
         validateOnSubmit: false,
         tooltip: "Your application's ID",
+        controller: _cubit.idController,
       ),
       const SizedBox(height: 8),
       Row(
@@ -60,7 +61,7 @@ class _ApplicationFormState extends State<ApplicationForm> {
         children: [
           Expanded(
             child: CustomTextField(
-              _formKey,
+              _cubit.formKey,
               decoration: const InputDecoration(
                 labelText: Strings.details,
                 hintText: 'Playing Squad',
@@ -68,18 +69,20 @@ class _ApplicationFormState extends State<ApplicationForm> {
               validateOnSubmit: false,
               allowEmptyValue: true,
               tooltip: 'What are you doing?',
+              controller: _cubit.detailsController,
             ),
           ),
           const SizedBox(width: 8),
           Expanded(
             child: CustomTextField(
-              _formKey,
+              _cubit.formKey,
               decoration: const InputDecoration(
                 labelText: Strings.state,
                 hintText: 'In Lobby',
               ),
               validateOnSubmit: false,
               allowEmptyValue: true,
+              controller: _cubit.stateController,
             ),
           ),
         ],
@@ -99,21 +102,23 @@ class _ApplicationFormState extends State<ApplicationForm> {
         children: [
           Expanded(
             child: CustomTextField(
-              _formKey,
+              _cubit.formKey,
               decoration:
                   const InputDecoration(label: Text(Strings.largeImageKey)),
               allowEmptyValue: true,
               validateOnSubmit: false,
+              controller: _cubit.lImgKeyController,
             ),
           ),
           const SizedBox(width: 8),
           Expanded(
             child: CustomTextField(
-              _formKey,
+              _cubit.formKey,
               decoration:
                   const InputDecoration(label: Text(Strings.largeImageText)),
               allowEmptyValue: true,
               validateOnSubmit: false,
+              controller: _cubit.lImgTextController,
             ),
           ),
         ],
@@ -124,21 +129,23 @@ class _ApplicationFormState extends State<ApplicationForm> {
         children: [
           Expanded(
             child: CustomTextField(
-              _formKey,
+              _cubit.formKey,
               decoration:
                   const InputDecoration(label: Text(Strings.smallImageKey)),
               allowEmptyValue: true,
               validateOnSubmit: false,
+              controller: _cubit.sImgKeyController,
             ),
           ),
           const SizedBox(width: 8),
           Expanded(
             child: CustomTextField(
-              _formKey,
+              _cubit.formKey,
               decoration:
                   const InputDecoration(label: Text(Strings.smallImageText)),
               allowEmptyValue: true,
               validateOnSubmit: false,
+              controller: _cubit.sImgTextController,
             ),
           ),
         ],
@@ -158,9 +165,9 @@ class _ApplicationFormState extends State<ApplicationForm> {
         children: [
           const Text(Strings.enableStartTime),
           CustomSwitchButton(
-            value: enableStartTime,
+            value: _cubit.enableStartTime,
             onToggle: (v) => setState(
-              () => enableStartTime = v,
+              () => _cubit.enableStartTime = v,
             ),
           )
         ],

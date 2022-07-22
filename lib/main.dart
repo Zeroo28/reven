@@ -3,7 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'core/config_cubit/config_cubit.dart';
+import 'core/app_cubit/create_app_cubit.dart';
+import 'database/app_database.dart';
 import 'presentation/screens/add_app/add_app_screen.dart';
 import 'presentation/screens/home/home_screen.dart';
 import 'presentation/screens/settings/settings_screen.dart';
@@ -14,7 +15,8 @@ import 'utils/constants/strings.dart';
 
 void main() async {
   // DiscordRPC.initialize();
-  runApp(const DiscordRPCApp());
+  final db = AppDatabase();
+  runApp(DiscordRPCApp(db));
 
   doWhenWindowReady(() {
     final win = appWindow;
@@ -27,15 +29,14 @@ void main() async {
 }
 
 class DiscordRPCApp extends StatelessWidget {
-  const DiscordRPCApp({Key? key}) : super(key: key);
+  final AppDatabase db;
+  const DiscordRPCApp(this.db, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider<ConfigCubit>(
-          create: (context) => ConfigCubit()..initialize(),
-        ),
+        BlocProvider(create: (_) => ApplicationsCubit(db))
       ],
       child: MaterialApp(
         title: Strings.appName,
