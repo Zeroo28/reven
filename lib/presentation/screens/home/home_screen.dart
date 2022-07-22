@@ -2,8 +2,10 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'cubit/home_cubit.dart';
-import '../../../utils/constants.dart';
+import '../../../core/app_cubit/create_app_cubit.dart';
+import '../../../utils/constants/configs.dart';
+import '../../../utils/constants/strings.dart';
+import '../../../utils/constants/page_routes.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -14,7 +16,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   late bool isDebug;
-  late HomeCubit _cubit;
+  late ApplicationsCubit _cubit;
 
   @override
   void initState() {
@@ -24,7 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    _cubit = BlocProvider.of<HomeCubit>(context);
+    _cubit = BlocProvider.of<ApplicationsCubit>(context);
     final theme = Theme.of(context);
     final size = MediaQuery.of(context).size;
     return Scaffold(
@@ -39,46 +41,31 @@ class _HomeScreenState extends State<HomeScreen> {
             Navigator.pushNamed(context, Routes.settings);
           },
           iconSize: 32,
-          icon: Icon(
-            Icons.settings,
-            color: theme.buttonTheme.colorScheme?.secondary,
-          ),
+          icon: const Icon(Icons.settings),
         ),
       ),
       body: _buildBody(theme, context, size),
-      floatingActionButton: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          FloatingActionButton(
-            heroTag: 'clear',
-            onPressed: _cubit.clearConfig,
-            tooltip: 'Clear config',
-            child: const Icon(Icons.clear_all_rounded),
-          ),
-          const SizedBox(width: 8),
-          FloatingActionButton(
-            heroTag: 'refresh',
-            onPressed: _cubit.initialize,
-            tooltip: 'Refresh',
-            child: const Icon(Icons.refresh_rounded),
-          ),
-        ],
+      floatingActionButton: FloatingActionButton(
+        heroTag: Keys.heroSettingsTag,
+        onPressed: () => Navigator.pushNamed(context, Routes.addApp),
+        tooltip: 'Create new application',
+        child: const Icon(Icons.add_rounded),
       ),
     );
   }
 
   Widget _buildBody(ThemeData theme, BuildContext context, Size size) {
-    return BlocBuilder<HomeCubit, HomeState>(
-      builder: (context, state) {
-        if (state is HomeLoading) {
+    return BlocBuilder<ApplicationsCubit, ApplicationsState>(
+      builder: (context, newState) {
+        if (newState is ApplicationsLoading) {
           return const Center(
             child: CircularProgressIndicator(),
           );
         }
-        if (state is HomeLoaded) {
-          return _buildLoadedScreen(context, state);
+        if (newState is ApplicationsLoaded) {
+          return _buildLoadedScreen(context, newState);
         }
-        if (state is HomeError) {
+        if (newState is ApplicationsError) {
           return const Center(
             child: Text(Strings.errDefault),
           );
@@ -94,14 +81,14 @@ class _HomeScreenState extends State<HomeScreen> {
     return RichText(
       overflow: TextOverflow.fade,
       text: TextSpan(
-        text: Strings.discord,
+        text: Strings.appName.split("").take(2).join(),
         style: theme.appBarTheme.titleTextStyle?.copyWith(
           color: theme.colorScheme.onBackground,
           fontWeight: FontWeight.w600,
         ),
         children: [
           TextSpan(
-            text: " ${Strings.rpc}",
+            text: Strings.appName.split('Re').last,
             style: theme.appBarTheme.titleTextStyle?.copyWith(
               color: theme.colorScheme.onBackground,
               fontWeight: FontWeight.normal,
@@ -114,16 +101,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget _buildLoadedScreen(
     BuildContext ctx,
-    HomeLoaded state,
+    ApplicationsLoaded state,
   ) {
-    if (state.firstRun) {
-      // wait for 1500ms
-      Future.delayed(const Duration(milliseconds: 1500), () {
-        Navigator.pushNamed(context, Routes.addApp);
-      });
-    }
     return Center(
-      child: Text('First run: ${state.firstRun}'),
+      child: Text('First run: ${state.applications.isEmpty}'),
     );
   }
 }
