@@ -15,9 +15,10 @@ part 'app_database.g.dart';
 @DriftDatabase(tables: [Application], daos: [ApplicationsDao])
 class AppDatabase extends _$AppDatabase {
   AppDatabase() : super(_init());
+  AppDatabase.test(QueryExecutor e) : super(e);
 
   @override
-  int get schemaVersion => 1;  
+  int get schemaVersion => 1;
 }
 
 LazyDatabase _init() {
