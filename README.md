@@ -1,5 +1,5 @@
 <div align="center">
-    <h1>Reven</h1>
+    <h1>Reven  RPC</h1>
 </div>
 
 Another Discord RPC client, cuz why not?
