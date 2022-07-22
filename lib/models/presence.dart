@@ -63,22 +63,27 @@ class Presence {
 
   factory Presence.fromJson(Map<String, dynamic> json) {
     return Presence(
-      id: json[_PresenceKeys.id] as int,
-      state: json[_PresenceKeys.state] as String,
-      details: json[_PresenceKeys.details] as String,
-      startTimeStamp: json[_PresenceKeys.startTimeStamp] as int,
-      endTimeStamp: json[_PresenceKeys.endTimeStamp] as int,
-      largeImageKey: json[_PresenceKeys.largeImageKey] as String,
-      largeImageText: json[_PresenceKeys.largeImageText] as String,
-      smallImageKey: json[_PresenceKeys.smallImageKey] as String,
-      smallImageText: json[_PresenceKeys.smallImageText] as String,
-      partyId: json[_PresenceKeys.partyId] as String,
-      partySize: json[_PresenceKeys.partySize] as int,
-      partySizeMax: json[_PresenceKeys.partySizeMax] as int,
-      matchSecret: json[_PresenceKeys.matchSecret] as String,
-      joinSecret: json[_PresenceKeys.joinSecret] as String,
-      spectateSecret: json[_PresenceKeys.spectateSecret] as String,
+      id: json[_PresenceKeys.id],
+      state: json[_PresenceKeys.state],
+      details: json[_PresenceKeys.details],
+      startTimeStamp: json[_PresenceKeys.startTimeStamp],
+      endTimeStamp: json[_PresenceKeys.endTimeStamp],
+      largeImageKey: json[_PresenceKeys.largeImageKey],
+      largeImageText: json[_PresenceKeys.largeImageText],
+      smallImageKey: json[_PresenceKeys.smallImageKey],
+      smallImageText: json[_PresenceKeys.smallImageText],
+      partyId: json[_PresenceKeys.partyId],
+      partySize: json[_PresenceKeys.partySize],
+      partySizeMax: json[_PresenceKeys.partySizeMax],
+      matchSecret: json[_PresenceKeys.matchSecret],
+      joinSecret: json[_PresenceKeys.joinSecret],
+      spectateSecret: json[_PresenceKeys.spectateSecret],
     );
+  }
+
+  @override
+  String toString() {
+    return 'Presence { id: $id, state: $state, details: $details, startTimeStamp: $startTimeStamp, endTimeStamp: $endTimeStamp, largeImageKey: $largeImageKey, largeImageText: $largeImageText, smallImageKey: $smallImageKey }';
   }
 }
 
