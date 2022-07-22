@@ -1,6 +1,6 @@
 class Strings {
   static const String about = 'About';
-  static const String appName = 'Reven';
+  static const String appName = 'Reven RPC';
   static const String exit = 'Exit';
   static const String helloWorld = 'Hello World';
   static const String home = 'Home';
