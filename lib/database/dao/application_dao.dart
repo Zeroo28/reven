@@ -21,6 +21,7 @@ class ApplicationsDao extends DatabaseAccessor<AppDatabase>
   ///
   /// Returns: `Future<int>` index of updated column.
   Future saveApplication(Presence app) {
+    logger.debug('App: ${app.toJsonString()}');
     final col = ApplicationCompanion(
       body: Value(app.toJsonString()),
       createdAt: Value(DateTime.now()),
@@ -31,13 +32,13 @@ class ApplicationsDao extends DatabaseAccessor<AppDatabase>
   /// Query all applications from the database, no filtering. Use
   /// `ApplicationsDao.getApplicationById` to get a single application with
   /// matching id.
-  /// 
+  ///
   /// Returns `Future<List<Applications>>`, list will be empty if no applications
   /// are found in the database.
   Future<List<Applications>> get getApplications => select(application).get();
 
   /// Query single application from the database with matching ID.
-  /// 
+  ///
   /// Returns: `Future<Application>` or `null` if no applications are found.
   Future<Applications>? getApplicationById(int id) {
     try {

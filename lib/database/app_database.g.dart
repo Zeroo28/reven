@@ -9,13 +9,13 @@ part of 'app_database.dart';
 // ignore_for_file: type=lint
 class Applications extends DataClass implements Insertable<Applications> {
   final int id;
-  final String? body;
+  final String body;
   final bool active;
   final DateTime createdAt;
   final DateTime? lastUsed;
   Applications(
       {required this.id,
-      this.body,
+      required this.body,
       required this.active,
       required this.createdAt,
       this.lastUsed});
@@ -25,7 +25,7 @@ class Applications extends DataClass implements Insertable<Applications> {
       id: const IntType()
           .mapFromDatabaseResponse(data['${effectivePrefix}id'])!,
       body: const StringType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}body']),
+          .mapFromDatabaseResponse(data['${effectivePrefix}body'])!,
       active: const BoolType()
           .mapFromDatabaseResponse(data['${effectivePrefix}active'])!,
       createdAt: const DateTimeType()
@@ -38,9 +38,7 @@ class Applications extends DataClass implements Insertable<Applications> {
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     map['id'] = Variable<int>(id);
-    if (!nullToAbsent || body != null) {
-      map['body'] = Variable<String?>(body);
-    }
+    map['body'] = Variable<String>(body);
     map['active'] = Variable<bool>(active);
     map['created_at'] = Variable<DateTime>(createdAt);
     if (!nullToAbsent || lastUsed != null) {
@@ -52,7 +50,7 @@ class Applications extends DataClass implements Insertable<Applications> {
   ApplicationCompanion toCompanion(bool nullToAbsent) {
     return ApplicationCompanion(
       id: Value(id),
-      body: body == null && nullToAbsent ? const Value.absent() : Value(body),
+      body: Value(body),
       active: Value(active),
       createdAt: Value(createdAt),
       lastUsed: lastUsed == null && nullToAbsent
@@ -66,7 +64,7 @@ class Applications extends DataClass implements Insertable<Applications> {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return Applications(
       id: serializer.fromJson<int>(json['id']),
-      body: serializer.fromJson<String?>(json['body']),
+      body: serializer.fromJson<String>(json['body']),
       active: serializer.fromJson<bool>(json['active']),
       createdAt: serializer.fromJson<DateTime>(json['createdAt']),
       lastUsed: serializer.fromJson<DateTime?>(json['lastUsed']),
@@ -77,7 +75,7 @@ class Applications extends DataClass implements Insertable<Applications> {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
       'id': serializer.toJson<int>(id),
-      'body': serializer.toJson<String?>(body),
+      'body': serializer.toJson<String>(body),
       'active': serializer.toJson<bool>(active),
       'createdAt': serializer.toJson<DateTime>(createdAt),
       'lastUsed': serializer.toJson<DateTime?>(lastUsed),
@@ -124,7 +122,7 @@ class Applications extends DataClass implements Insertable<Applications> {
 
 class ApplicationCompanion extends UpdateCompanion<Applications> {
   final Value<int> id;
-  final Value<String?> body;
+  final Value<String> body;
   final Value<bool> active;
   final Value<DateTime> createdAt;
   final Value<DateTime?> lastUsed;
@@ -137,14 +135,15 @@ class ApplicationCompanion extends UpdateCompanion<Applications> {
   });
   ApplicationCompanion.insert({
     this.id = const Value.absent(),
-    this.body = const Value.absent(),
+    required String body,
     this.active = const Value.absent(),
     required DateTime createdAt,
     this.lastUsed = const Value.absent(),
-  }) : createdAt = Value(createdAt);
+  })  : body = Value(body),
+        createdAt = Value(createdAt);
   static Insertable<Applications> custom({
     Expression<int>? id,
-    Expression<String?>? body,
+    Expression<String>? body,
     Expression<bool>? active,
     Expression<DateTime>? createdAt,
     Expression<DateTime?>? lastUsed,
@@ -160,7 +159,7 @@ class ApplicationCompanion extends UpdateCompanion<Applications> {
 
   ApplicationCompanion copyWith(
       {Value<int>? id,
-      Value<String?>? body,
+      Value<String>? body,
       Value<bool>? active,
       Value<DateTime>? createdAt,
       Value<DateTime?>? lastUsed}) {
@@ -180,7 +179,7 @@ class ApplicationCompanion extends UpdateCompanion<Applications> {
       map['id'] = Variable<int>(id.value);
     }
     if (body.present) {
-      map['body'] = Variable<String?>(body.value);
+      map['body'] = Variable<String>(body.value);
     }
     if (active.present) {
       map['active'] = Variable<bool>(active.value);
@@ -223,8 +222,8 @@ class $ApplicationTable extends Application
   final VerificationMeta _bodyMeta = const VerificationMeta('body');
   @override
   late final GeneratedColumn<String?> body = GeneratedColumn<String?>(
-      'body', aliasedName, true,
-      type: const StringType(), requiredDuringInsert: false);
+      'body', aliasedName, false,
+      type: const StringType(), requiredDuringInsert: true);
   final VerificationMeta _activeMeta = const VerificationMeta('active');
   @override
   late final GeneratedColumn<bool?> active = GeneratedColumn<bool?>(
@@ -260,6 +259,8 @@ class $ApplicationTable extends Application
     if (data.containsKey('body')) {
       context.handle(
           _bodyMeta, body.isAcceptableOrUnknown(data['body']!, _bodyMeta));
+    } else if (isInserting) {
+      context.missing(_bodyMeta);
     }
     if (data.containsKey('active')) {
       context.handle(_activeMeta,
@@ -294,8 +295,9 @@ class $ApplicationTable extends Application
 
 abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(SqlTypeSystem.defaultInstance, e);
-  _$AppDatabase.connect(DatabaseConnection c) : super.connect(c);
   late final $ApplicationTable application = $ApplicationTable(this);
+  late final ApplicationsDao applicationsDao =
+      ApplicationsDao(this as AppDatabase);
   @override
   Iterable<TableInfo> get allTables => allSchemaEntities.whereType<TableInfo>();
   @override
