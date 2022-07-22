@@ -1,8 +1,11 @@
+import 'dart:convert';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/app_cubit/create_app_cubit.dart';
+import '../../../models/presence.dart';
 import '../../../utils/constants/configs.dart';
 import '../../../utils/constants/strings.dart';
 import '../../../utils/constants/page_routes.dart';
@@ -57,18 +60,18 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget _buildBody(ThemeData theme, BuildContext context, Size size) {
     return BlocBuilder<ApplicationsCubit, ApplicationsState>(
-      builder: (context, newState) {
-        if (newState is ApplicationsLoading) {
+      builder: (context, state) {
+        if (state is ApplicationsLoading) {
           return const Center(
             child: CircularProgressIndicator(),
           );
         }
-        if (newState is ApplicationsLoaded) {
-          return _buildLoadedScreen(context, newState);
+        if (state is ApplicationsLoaded) {
+          return _buildLoadedScreen(context, state);
         }
-        if (newState is ApplicationsError) {
+        if (state is ApplicationsError) {
           return Center(
-            child: CustomErrorWidget(newState.error, st: newState.st),
+            child: CustomErrorWidget(state.error, st: state.st),
           );
         }
         return const Center(
@@ -104,8 +107,31 @@ class _HomeScreenState extends State<HomeScreen> {
     BuildContext ctx,
     ApplicationsLoaded state,
   ) {
-    return Center(
-      child: Text('First run: ${state.applications.isEmpty}'),
-    );
+    final applications = state.applications;
+    return applications.isEmpty
+        ? const Center(
+            child: Text('No applications found.'),
+          )
+        : ListView.builder(
+            itemCount: applications.length,
+            itemBuilder: (_, index) {
+              final currentApp = applications[index];
+              final presence = Presence.fromJson(jsonDecode(currentApp.body));
+              _cubit.logger.debug('Presence: $presence');
+              return ListTile(
+                title: Text('Name: ${presence.details ?? "No name specified"}'),
+                subtitle: presence.state != null
+                    ? Text('State: ${presence.state}')
+                    : null,
+                trailing: Tooltip(
+                  message: currentApp.active ? 'Active' : 'Not Running',
+                  child: CircleAvatar(
+                    backgroundColor:
+                        currentApp.active ? Colors.green : Colors.red,
+                  ),
+                ),
+              );
+            },
+          );
   }
 }

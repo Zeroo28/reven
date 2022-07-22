@@ -18,12 +18,21 @@ class ApplicationsLoaded extends ApplicationsState {
   List<Object> get props => [applications];
 }
 
-class ApplicationsError extends ApplicationsState {
-  final String error;
-  final StackTrace st;
+class ApplicationFound extends ApplicationsState {
+  final Applications application;
 
-  const ApplicationsError(this.error, this.st);
+  const ApplicationFound(this.application);
 
   @override
-  List<Object> get props => [error, st];
+  List<Object> get props => [application];
+}
+
+class ApplicationsError extends ApplicationsState {
+  final String error;
+  final StackTrace? st;
+
+  const ApplicationsError(this.error,{ this.st});
+
+  @override
+  List<Object> get props => [error];
 }

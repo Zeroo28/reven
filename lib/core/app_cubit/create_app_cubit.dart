@@ -24,6 +24,7 @@ class ApplicationsCubit extends Cubit<ApplicationsState> {
   final sImgKeyController = TextEditingController();
   final sImgTextController = TextEditingController();
   bool enableStartTime = false;
+  bool editableTitle = true;
 
   ApplicationsCubit(AppDatabase db) : super(ApplicationsLoading()) {
     dao = ApplicationsDao(db);
@@ -33,8 +34,29 @@ class ApplicationsCubit extends Cubit<ApplicationsState> {
     try {
       emit(ApplicationsLoaded(await dao.getApplications));
     } catch (e, st) {
-      logger.error(st);
-      emit(ApplicationsError(e.toString(), st));
+      logger.error(
+        'Something went wrong in ApplicationsCubit.initialize.',
+        error: e,
+        stackTrace: st,
+      );
+      emit(ApplicationsError(e.toString(), st: st));
+    }
+  }
+
+  void listApplications() async {
+    emit(ApplicationsLoading());
+    emit(ApplicationsLoaded(await dao.getApplications));
+  }
+
+  void getApplicationWhere(int id) async {
+    try {
+      emit(ApplicationsLoading());
+      final application = await dao.getApplicationById(id);
+      emit(ApplicationFound(application!));
+    } on NullThrownError {
+      emit(const ApplicationsError('No applications found'));
+    } catch (e, st) {
+      emit(ApplicationsError(e.toString(), st: st));
     }
   }
 
@@ -42,7 +64,9 @@ class ApplicationsCubit extends Cubit<ApplicationsState> {
     dao.saveApplication(application);
   }
 
-  void deleteApplication(int applicationId) {}
+  void deleteApplication(int applicationId) {
+    // TODO
+  }
 
   void validateForm() {
     if (formKey.currentState!.validate()) {
@@ -56,7 +80,7 @@ class ApplicationsCubit extends Cubit<ApplicationsState> {
       final application = Presence(
         id: int.parse(idController.text),
         details: details.isEmpty ? null : details,
-        state: state.isEmpty ? null : details,
+        state: state.isEmpty ? null : state,
         largeImageKey: largeImageKey.isEmpty ? null : largeImageKey,
         largeImageText: largeImageText.isEmpty ? null : largeImageText,
         smallImageKey: smallImageKey.isEmpty ? null : smallImageKey,
@@ -66,8 +90,6 @@ class ApplicationsCubit extends Cubit<ApplicationsState> {
             : null,
       );
       saveApplication(application);
-    } else {
-      logger.debug('Form not validated');
     }
   }
 }
