@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -19,12 +18,10 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  late bool isDebug;
   late ApplicationsCubit _cubit;
 
   @override
   void initState() {
-    isDebug = kDebugMode;
     super.initState();
   }
 

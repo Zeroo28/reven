@@ -20,13 +20,21 @@ class ApplicationsDao extends DatabaseAccessor<AppDatabase>
   /// Params: required `Presence`.
   ///
   /// Returns: `Future<int>` index of updated column.
-  Future saveApplication(Presence app) {
-    logger.debug('App: ${app.toJsonString()}');
-    final col = ApplicationCompanion(
-      body: Value(app.toJsonString()),
-      createdAt: Value(DateTime.now()),
-    );
-    return into(application).insertOnConflictUpdate(col);
+  Future<int>? saveApplication(Presence app) {
+    try {
+      final col = ApplicationCompanion(
+        body: Value(app.toJsonString()),
+        createdAt: Value(DateTime.now()),
+      );
+      return into(application).insertOnConflictUpdate(col);
+    } catch (e, st) {
+      logger.error(
+        'Something went wrong in ApplicationsDao.saveApplication',
+        error: e,
+        stackTrace: st,
+      );
+      return null;
+    }
   }
 
   /// Query all applications from the database, no filtering. Use
