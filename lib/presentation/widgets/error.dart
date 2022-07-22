@@ -1,7 +1,5 @@
 import 'package:clipboard/clipboard.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:reven/utils/helpers/logger_helper.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 import '../../utils/constants/strings.dart';
