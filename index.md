@@ -1,9 +1,3 @@
-<div align="center">
-    <h1>Reven  RPC</h1>
-</div>
-
-Another Discord RPC client, cuz why not?
-
 ### Contents
 1. [Getting started](#getting-started).
     - [Download](#download).
