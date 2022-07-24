@@ -10,9 +10,11 @@ import 'presentation/screens/home/home_screen.dart';
 import 'presentation/screens/settings/settings_screen.dart';
 import 'presentation/theme/theme.dart';
 import 'presentation/widgets/screen.dart';
-import 'utils/constants/page_routes.dart';
+import 'utils/constants/routes.dart';
 import 'utils/constants/strings.dart';
 
+final RouteObserver<ModalRoute<void>> routeObserver =
+    RouteObserver<ModalRoute<void>>();
 void main() async {
   // DiscordRPC.initialize();
   final db = AppDatabase();
@@ -49,9 +51,9 @@ class DiscordRPCApp extends StatelessWidget {
               builder: (context) => const Screen(HomeScreen()),
             );
           }
-          if (settings.name == Routes.addApp) {
+          if (settings.name == Routes.appDetails) {
             return CupertinoPageRoute(
-              builder: (_) => const Screen(AddApplicationScreen()),
+              builder: (_) => const Screen(AppDetailsScreen()),
             );
           }
           if (settings.name == Routes.settings) {
@@ -67,6 +69,7 @@ class DiscordRPCApp extends StatelessWidget {
             )),
           );
         },
+        navigatorObservers: [routeObserver],
       ),
     );
   }

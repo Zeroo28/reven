@@ -7,7 +7,7 @@ import '../../../core/app_cubit/create_app_cubit.dart';
 import '../../../models/presence.dart';
 import '../../../utils/constants/configs.dart';
 import '../../../utils/constants/strings.dart';
-import '../../../utils/constants/page_routes.dart';
+import '../../../utils/constants/routes.dart';
 import '../../widgets/error.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -48,7 +48,7 @@ class _HomeScreenState extends State<HomeScreen> {
       body: _buildBody(theme, context, size),
       floatingActionButton: FloatingActionButton(
         heroTag: Keys.heroSettingsTag,
-        onPressed: () => Navigator.pushNamed(context, Routes.addApp),
+        onPressed: () => Navigator.pushNamed(context, Routes.appDetails),
         tooltip: 'Create new application',
         child: const Icon(Icons.add_rounded),
       ),
@@ -114,7 +114,6 @@ class _HomeScreenState extends State<HomeScreen> {
             itemBuilder: (_, index) {
               final currentApp = applications[index];
               final presence = Presence.fromJson(jsonDecode(currentApp.body));
-              _cubit.logger.debug('Presence: $presence');
               return ListTile(
                 title: Text('Name: ${presence.details ?? "No name specified"}'),
                 subtitle: presence.state != null
