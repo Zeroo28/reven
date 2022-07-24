@@ -85,6 +85,10 @@ class Presence {
   String toString() {
     return 'Presence { id: $id, state: $state, details: $details, startTimeStamp: $startTimeStamp, endTimeStamp: $endTimeStamp, largeImageKey: $largeImageKey, largeImageText: $largeImageText, smallImageKey: $smallImageKey }';
   }
+
+  bool matches(Presence other) {
+    return this == other;
+  }
 }
 
 class _PresenceKeys {
