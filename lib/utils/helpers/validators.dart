@@ -12,6 +12,9 @@ class Validators {
     if (value.length > 18) {
       return Strings.errApplicationIdTooLong;
     }
+    if (value.length < 18) {
+      return Strings.errApplicationIdTooShort;
+    }
     if (value == Strings.egApplicationID.split(' ').last) {
       return Strings.errUseOfFakeId;
     }
