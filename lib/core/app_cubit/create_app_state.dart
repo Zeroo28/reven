@@ -31,7 +31,7 @@ class ApplicationsError extends ApplicationsState {
   final String error;
   final StackTrace? st;
 
-  const ApplicationsError(this.error,{ this.st});
+  const ApplicationsError(this.error, {this.st});
 
   @override
   List<Object> get props => [error];
