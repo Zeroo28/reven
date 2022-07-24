@@ -45,3 +45,12 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# Ignore flowcharts at the moment
+*.drawio
+*-flowchart.*
+*_flowchart.*
+
+# VS Code related stuff
+# there are no configuration files needed for flutter so i have ignored the whole directory
+.vscode/
