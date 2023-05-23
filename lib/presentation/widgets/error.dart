@@ -24,7 +24,7 @@ class _CustomErrorWidgetState extends State<CustomErrorWidget> {
       children: [
         Text(
           Strings.errDefault,
-          style: theme.textTheme.headline6,
+          style: theme.textTheme.titleLarge,
         ),
         const SizedBox(height: 12),
         Row(

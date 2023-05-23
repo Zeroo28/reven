@@ -42,7 +42,7 @@ class _ApplicationFormState extends State<ApplicationForm> {
     return [
       Text(
         Strings.details,
-        style: _theme.textTheme.headline6,
+        style: _theme.textTheme.titleLarge,
       ),
       CustomTextField(
         _cubit.formKey,
@@ -93,7 +93,7 @@ class _ApplicationFormState extends State<ApplicationForm> {
     return [
       Text(
         Strings.images,
-        style: _theme.textTheme.headline6,
+        style: _theme.textTheme.titleLarge,
       ),
       Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -156,7 +156,7 @@ class _ApplicationFormState extends State<ApplicationForm> {
     return [
       Text(
         Strings.others,
-        style: _theme.textTheme.headline6,
+        style: _theme.textTheme.titleLarge,
       ),
       Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,

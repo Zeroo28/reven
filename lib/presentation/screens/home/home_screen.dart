@@ -48,7 +48,7 @@ class _HomeScreenState extends State<HomeScreen> {
       body: _buildBody(theme, context, size),
       floatingActionButton: FloatingActionButton(
         heroTag: Keys.heroSettingsTag,
-        onPressed: () => Navigator.pushNamed(context, Routes.appDetails),
+        onPressed: () => Navigator.pushNamed(context, Routes.createApp),
         tooltip: 'Create new application',
         child: const Icon(Icons.add_rounded),
       ),

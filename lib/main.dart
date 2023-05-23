@@ -51,9 +51,9 @@ class DiscordRPCApp extends StatelessWidget {
               builder: (context) => const Screen(HomeScreen()),
             );
           }
-          if (settings.name == Routes.appDetails) {
+          if (settings.name == Routes.createApp) {
             return CupertinoPageRoute(
-              builder: (_) => const Screen(AppDetailsScreen()),
+              builder: (_) => const Screen(AddApplicationScreen()),
             );
           }
           if (settings.name == Routes.settings) {
@@ -62,11 +62,13 @@ class DiscordRPCApp extends StatelessWidget {
             );
           }
           return MaterialPageRoute(
-            builder: (_) => const Screen(Scaffold(
-              body: Center(
-                child: Text('Page not found 404'),
+            builder: (_) => const Screen(
+              Scaffold(
+                body: Center(
+                  child: Text('Page not found 404'),
+                ),
               ),
-            )),
+            ),
           );
         },
         navigatorObservers: [routeObserver],

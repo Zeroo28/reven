@@ -53,7 +53,7 @@ class ApplicationsCubit extends Cubit<ApplicationsState> {
       emit(ApplicationsLoading());
       final application = await dao.getApplicationById(id);
       emit(ApplicationFound(application!));
-    } on NullThrownError {
+    } on TypeError catch (_) {
       emit(const ApplicationsError('No applications found'));
     } catch (e, st) {
       emit(ApplicationsError(e.toString(), st: st));
